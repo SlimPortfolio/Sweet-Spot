@@ -1,0 +1,9 @@
+12/3/2024
+-Initial Project setup, created Next.js App
+
+12/6/2024
+-Create Routes for the basic screens: home, key finder, and about
+-Create the Nav Bar at the top for navigation
+-Fill out content on Key Finder App with basic functionality
+-Select some useful Shadcn components to implement
+-Reference Lisa's styling guide 
