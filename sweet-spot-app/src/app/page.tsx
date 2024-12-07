@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import logo from "../images/SweetSpot WordMark@3x.png";
 import {
@@ -8,6 +10,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
+import { CarouselPlugin } from "@/components/carousel-plugin";
 
 export default function Home() {
   return (
@@ -19,40 +22,10 @@ export default function Home() {
         style={{ height: "auto", width: "500px" }}
       ></Image>
       <h1 className="text-xl w-[48rem] text-center my-5">
-        SweetSpot was built for Christian Worship Leaders as a tool to find a
-        suitable key for their vocalist to sing in for a given song.
+        SweetSpot is a tool for Christian Worship Leaders to find a suitable key
+        for their vocalists to sing songs in.
       </h1>
-      <Carousel>
-        <CarouselContent>
-          <CarouselItem>
-            <div>
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center">
-                  <span className="font-semibold">rich money</span>
-                </CardContent>
-              </Card>
-            </div>
-          </CarouselItem>
-          <CarouselItem>
-            <div>
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center">
-                  <span className="font-semibold">rich money2</span>
-                </CardContent>
-              </Card>
-            </div>
-          </CarouselItem>
-          <CarouselItem>
-            <Card>
-              <CardContent className="flex aspect-square items-center justify-center">
-                <span className="font-semibold">rich money2</span>
-              </CardContent>
-            </Card>
-          </CarouselItem>
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
+      <CarouselPlugin />
     </div>
   );
 }
