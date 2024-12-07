@@ -51,6 +51,7 @@ export default {
           "5": "hsl(var(--chart-5))",
         },
         "ss-logo-blue": "#4338CA",
+        "ss-background-blue": "#4F46E5",
       },
       borderRadius: {
         lg: "var(--radius)",

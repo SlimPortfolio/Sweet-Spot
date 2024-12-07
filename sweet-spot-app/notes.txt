@@ -4,6 +4,19 @@
 12/6/2024
 -Create Routes for the basic screens: home, key finder, and about
 -Create the Nav Bar at the top for navigation
--Fill out content on Key Finder App with basic functionality
--Select some useful Shadcn components to implement
--Reference Lisa's styling guide 
+
+12/7/2024
+-design footer 
+
+-design home page
+-design key finder page and Fill out content  with basic functionality
+-design login / create user page
+-rename title of page, and icon
+
+Backlog Items:
+-Connect App with Database with ability to access songs
+-Create an Admin view to manage everything (add/remove songs, add/remove/approve user)
+-Deploy App to Vercel
+-Create a 'how it works' page, or even a video or animation that would show some functionality
+
+ 

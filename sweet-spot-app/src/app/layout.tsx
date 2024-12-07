@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import HeaderBar from "@/components/header-bar";
 import { Inria_Sans } from "next/font/google";
+import Footer from "@/components/footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
 };
 const inriaFont = Inria_Sans({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "700"],
   variable: "--font-inria-sans",
 });
 
@@ -39,6 +40,7 @@ export default function RootLayout({
         {children}
         {/* <h1 className={`${inriaFont.className}`}>Let's See What Happens</h1> */}
         <h1 className="font-inriaSans">Lets see</h1>
+        <Footer />
       </body>
     </html>
   );
