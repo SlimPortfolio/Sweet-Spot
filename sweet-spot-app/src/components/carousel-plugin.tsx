@@ -1,6 +1,6 @@
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
-import { ListPlus, LogIn, UserPlus } from "lucide-react";
+import { FileMusic, ListPlus, LogIn, MicVocal, UserPlus } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -13,13 +13,13 @@ import {
 
 export function CarouselPlugin() {
   const plugin = React.useRef(
-    Autoplay({ delay: 6000, stopOnInteraction: true })
+    Autoplay({ delay: 5000, stopOnInteraction: true })
   );
 
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full max-w-xs"
+      className="w-full max-w-xl drop-shadow-lg"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
       opts={{
@@ -29,10 +29,23 @@ export function CarouselPlugin() {
       <CarouselContent>
         <CarouselItem>
           <div className="p-1">
-            <Card>
-              <CardContent className="flex h-48 items-center justify-center p-6 flex-col">
-                <UserPlus size={100} color="#008081" />
-                <p className="font-semibold">
+            <Card className="bg-[#f8f8f8]">
+              <CardContent className="flex h-36 items-center justify-end p-6 flex-col">
+                <MicVocal size={60} color="#000000" />
+                <p className=" flex font-inriaSans pt-3">
+                  Instantly calculate a key that your vocalist will be able to
+                  sing!
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </CarouselItem>
+        <CarouselItem>
+          <div className="p-1">
+            <Card className="bg-[#f8f8f8]">
+              <CardContent className="flex h-36 items-center justify-end p-6 flex-col">
+                <UserPlus size={60} color="#000000" />
+                <p className=" flex font-inriaSans pt-3">
                   Create an account for your church to be able to add or remove
                   members
                 </p>
@@ -42,20 +55,12 @@ export function CarouselPlugin() {
         </CarouselItem>
         <CarouselItem>
           <div className="p-1">
-            <Card>
-              <CardContent className="flex aspect-square items-center justify-center p-6">
-                <LogIn />
-                <span className="text-4xl font-semibold">numba 2</span>
-              </CardContent>
-            </Card>
-          </div>
-        </CarouselItem>
-        <CarouselItem>
-          <div className="p-1">
-            <Card>
-              <CardContent className="flex aspect-square items-center justify-center p-6">
-                <ListPlus />
-                <span className="text-4xl font-semibold">numba 3</span>
+            <Card className="bg-[#f8f8f8]">
+              <CardContent className="flex h-36 items-center justify-end p-6 flex-col">
+                <FileMusic size={60} color="#000000" />
+                <p className="flex font-inriaSans pt-3">
+                  Request for new songs to be added to the system.
+                </p>
               </CardContent>
             </Card>
           </div>
