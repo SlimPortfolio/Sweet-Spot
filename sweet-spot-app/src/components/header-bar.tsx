@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 export default function HeaderBar() {
   const router = useRouter();
   return (
-    <div className="bg-white flex h-20 items-center px-8 mb-6">
+    <div className="bg-white flex h-20 items-center px-8 mb-11">
       <Image
         src={logo}
         alt="SweetSpot Logo"

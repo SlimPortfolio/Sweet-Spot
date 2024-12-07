@@ -38,8 +38,6 @@ export default function RootLayout({
       >
         <HeaderBar />
         {children}
-        {/* <h1 className={`${inriaFont.className}`}>Let's See What Happens</h1> */}
-        <h1 className="font-inriaSans">Lets see</h1>
         <Footer />
       </body>
     </html>
