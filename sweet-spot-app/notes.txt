@@ -7,9 +7,15 @@
 
 12/7/2024
 -design footer 
-
 -design home page
+
+-find components to use for the key finder page:
+-> typography/text will just be indria-sans font 
+-> combo box can be used for the dropdown menus for the vocalists / song options
+
 -design key finder page and Fill out content  with basic functionality
+->Potential Features: side bar with search filter and all of the songs to choose from
+->List and the bottom that shows the history of songs checked.
 -design login / create user page
 -rename title of page, and icon
 
