@@ -125,3 +125,12 @@ valueToOctaveDictionary.set(8, "G#");
 valueToOctaveDictionary.set(9, "A");
 valueToOctaveDictionary.set(10, "A#");
 valueToOctaveDictionary.set(11, "B");
+
+//Dictionary for easy-chord options
+export let guitarFriendlySuggestion = new Map();
+guitarFriendlySuggestion.set("C#", "D");
+guitarFriendlySuggestion.set("D#", "E");
+guitarFriendlySuggestion.set("F", "E");
+guitarFriendlySuggestion.set("F#", "G");
+guitarFriendlySuggestion.set("G#", "A");
+guitarFriendlySuggestion.set("A#", "B");

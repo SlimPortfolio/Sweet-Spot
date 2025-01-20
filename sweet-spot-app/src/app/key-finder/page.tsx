@@ -6,6 +6,7 @@ import {
   allNotes,
   octaveDictionary,
   valueToOctaveDictionary,
+  guitarFriendlySuggestion,
 } from "@/utils/key-calculation";
 
 export default function KeyFinder() {
@@ -285,7 +286,7 @@ export default function KeyFinder() {
     songName: "This is Amazing Grace",
   });
   const [advancedSettings, setAdvancedSettings] = useState({
-    isGuitarFriendly: false,
+    isGuitarFriendly: true,
     optimalKey: false,
     //maybe include keys to avoid here
   });
@@ -346,9 +347,16 @@ export default function KeyFinder() {
     }
     suggestedKeyValue = ((suggestedKeyValue % 12) + 12) % 12;
     suggestedKey = valueToOctaveDictionary.get(suggestedKeyValue);
-    console.log(suggestedKey);
-    //looks like we have most base cases set up. Next step is to test and make sure this still works even if the vocalist has a larger range than the original song
-    //then we need to start enabling some of the features...such as implementing logic for guitar friendly chords.
+
+    //adding logic for suggesting a better key if possible
+    if (
+      rangeVocalist - rangeSong >= 3 &&
+      guitarFriendlySuggestion.get(suggestedKey) != null &&
+      advancedSettings.isGuitarFriendly == true
+    ) {
+      suggestedKey = guitarFriendlySuggestion.get(suggestedKey);
+    }
+    return suggestedKey;
   }
   getSuggestedKey();
 
