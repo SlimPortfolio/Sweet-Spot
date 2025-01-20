@@ -11,6 +11,7 @@ export default function HeaderBar() {
       <Image
         src={logo}
         alt="SweetSpot Logo"
+        priority
         style={{ height: "35px", width: "200px" }}
         className="mx-2 cursor-pointer"
         onClick={() => router.push("/")}
