@@ -360,6 +360,7 @@ export default function KeyFinder() {
   }
   getSuggestedKey();
 
+  //next feature to work on is visualization of the lower end and higher end to see what can be navigated between.
   return (
     <div>
       <h1>This is Where the Key Finder App Will Go</h1>
