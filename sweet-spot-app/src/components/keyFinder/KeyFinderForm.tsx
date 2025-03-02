@@ -1,12 +1,31 @@
 "use client";
+import { KFComboBox } from "./KFComboBox";
 
 export default function KeyFinderForm() {
   return (
-    <div className="bg-ss-background-blue flex fixed bottom-0 w-dvw h-24 p-5">
-      <div className="grow flex flex-col justify-end ">
-        <h1 className="font-inriaSans text-white text-3xl ">
-          <strong>SweetSpot</strong>
+    <div>
+      <div className="pl-24 pt-10 pb-10 -mr-24">
+        <h1 className="font-inriaSans text-5xl">
+          <strong>Find Your Key</strong>
+          {/* we can use a combo box for selecting song*/}
+          {/* we can use a combo box for selecting vocalist*/}
+          {/* we can use a submit button, and then an advanced search toggle button*/}
         </h1>
+        <KFComboBox
+          selections={[
+            {
+              value: "defyGravity",
+              label: "Defy Gravity",
+            },
+            {
+              value: "someSong",
+              label: "Some Song",
+            },
+          ]}
+          iconName="music"
+          placeholder="Select a Song"
+          filterPlaceholder="Search Songs"
+        />
       </div>
     </div>
   );

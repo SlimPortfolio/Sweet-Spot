@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import KeyFinderForm from "@/components/keyFinder/KeyFinderForm";
 import {
   allNotes,
   octaveDictionary,
@@ -363,10 +364,12 @@ export default function KeyFinder() {
   //next feature to work on is visualization of the lower end and higher end to see what can be navigated between.
   return (
     <div className="flex w-full h-full">
-      <div className="bg-rose-200 flex-grow">
+      {/* <div className="flex-grow"> */}
+      <div style={{ width: "50%" }}>
+        <KeyFinderForm />
         <h1>Section #1</h1>
       </div>
-      <div className="bg-green-800 flex-grow">
+      <div className="bg-green-800" style={{ width: "50%" }}>
         <h1>Section #2</h1>
       </div>
     </div>
