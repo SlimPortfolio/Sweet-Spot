@@ -364,7 +364,6 @@ export default function KeyFinder() {
   //next feature to work on is visualization of the lower end and higher end to see what can be navigated between.
   return (
     <div className="flex w-full h-full">
-      {/* <div className="flex-grow"> */}
       <div style={{ width: "50%" }}>
         <KeyFinderForm />
         <h1>Section #1</h1>

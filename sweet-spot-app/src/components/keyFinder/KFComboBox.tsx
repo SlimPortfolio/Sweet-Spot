@@ -44,25 +44,39 @@ export function KFComboBox(props: KFCProps) {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
-          variant="outline"
+          variant="secondary"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-[100%] justify-between text-md text-gray-600"
+          size={"lg"}
+          //text-lg
         >
           {value
             ? props.selections.find((selection) => selection.value === value)
                 ?.label
             : props.placeholder}
           {props.iconName === "music" ? (
-            <Music />
+            <Music
+              style={{ height: "25px", width: "25px" }}
+              color="black"
+              strokeWidth={2.5}
+            />
           ) : props.iconName === "mic-vocal" ? (
-            <MicVocal />
+            <MicVocal
+              style={{ height: "25px", width: "25px" }}
+              color="black"
+              strokeWidth={2.5}
+            />
           ) : (
-            <ArrowUpDown />
+            <ArrowUpDown
+              style={{ height: "25px", width: "25px" }}
+              color="black"
+              strokeWidth={2.5}
+            />
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-[300px] p-0">
         <Command>
           <CommandInput
             placeholder={
@@ -76,6 +90,7 @@ export function KFComboBox(props: KFCProps) {
                 <CommandItem
                   key={selection.value}
                   value={selection.value}
+                  className="cursor-pointer"
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue);
                     setOpen(false);
