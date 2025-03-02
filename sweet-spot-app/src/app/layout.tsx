@@ -32,13 +32,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ height: "100%" }}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${inriaFont.variable} antialiased`}
+        style={{ height: "100%" }}
       >
-        <HeaderBar />
-        {children}
-        <Footer />
+        <div
+          style={{ display: "flex", flexDirection: "column", height: "100%" }}
+        >
+          <HeaderBar />
+          <div
+            style={{
+              flex: "1",
+              backgroundColor: "red",
+              paddingBottom: "96px",
+            }}
+          >
+            {children}
+          </div>
+          <Footer />
+        </div>
       </body>
     </html>
   );

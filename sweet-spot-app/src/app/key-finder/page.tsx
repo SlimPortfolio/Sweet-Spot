@@ -358,12 +358,17 @@ export default function KeyFinder() {
     }
     return suggestedKey;
   }
-  getSuggestedKey();
+  // getSuggestedKey();
 
   //next feature to work on is visualization of the lower end and higher end to see what can be navigated between.
   return (
-    <div>
-      <h1>This is Where the Key Finder App Will Go</h1>
+    <div className="flex w-full h-full">
+      <div className="bg-rose-200 flex-grow">
+        <h1>Section #1</h1>
+      </div>
+      <div className="bg-green-800 flex-grow">
+        <h1>Section #2</h1>
+      </div>
     </div>
   );
 }
