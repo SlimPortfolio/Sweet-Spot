@@ -5,8 +5,11 @@ import { KFComboBox } from "./KFComboBox";
 import { KFPopover } from "./KFPopover";
 const songs = [
   {
-    label: "Defy Gravity",
+    label: "King of Kings",
     id: "1",
+    songLowNote: "C#4",
+    songHighNote: "D5",
+    songOriginalKey: "D",
   },
   {
     label: "Some Song",
@@ -18,11 +21,14 @@ const vocalists = [
   {
     label: "Steven Lim",
     id: "1",
-    vocalistLowNote: "G#2",
+    vocalistLowNote: "A3",
+    vocalistHighNote: "E5",
   },
   {
-    label: "Pork Pig",
+    label: "David Shiu",
     id: "2",
+    vocalistLowNote: "F3",
+    vocalistHighNote: "C#5",
   },
   {
     label: "Pork Pig",

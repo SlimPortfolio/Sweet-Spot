@@ -44,6 +44,7 @@ type KFCProps = {
 
 //KFCombo Box allows the user to pass through an array of objects to select from
 //The must pass in a useState setter from the parent, an ID, and a label that will be displayed
+//in this case, there are optional props of songLowNote, songHighNote, songOriginalKey, vocalistLowNote, and vocalistHighNote that can be passed through
 
 export function KFComboBox(props: KFCProps) {
   const [open, setOpen] = React.useState(false);
