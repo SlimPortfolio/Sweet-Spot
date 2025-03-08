@@ -5,12 +5,10 @@ import { KFComboBox } from "./KFComboBox";
 import { KFPopover } from "./KFPopover";
 const songs = [
   {
-    value: "defyGravity",
     label: "Defy Gravity",
     id: "1",
   },
   {
-    value: "someSong",
     label: "Some Song",
     id: "2",
   },
@@ -18,18 +16,15 @@ const songs = [
 
 const vocalists = [
   {
-    value: "stevenlim",
     label: "Steven Lim",
     id: "1",
     vocalistLowNote: "G#2",
   },
   {
-    value: "porkpig",
     label: "Pork Pig",
     id: "2",
   },
   {
-    value: "porkpig",
     label: "Pork Pig",
     id: "3",
   },

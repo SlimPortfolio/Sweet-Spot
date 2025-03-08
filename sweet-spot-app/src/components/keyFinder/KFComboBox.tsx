@@ -26,7 +26,6 @@ import {
 } from "@/components/ui/popover";
 
 type SelectionObject = {
-  value: string;
   label: string;
   id: string;
   songLowNote?: string;
@@ -48,7 +47,6 @@ type KFCProps = {
 
 export function KFComboBox(props: KFCProps) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
   const [id, setId] = React.useState("");
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -106,7 +104,7 @@ export function KFComboBox(props: KFCProps) {
                 //each potential song / vocalist is mapped here as CommandItems
                 <CommandItem
                   key={selection.id}
-                  value={selection.value}
+                  value={selection.label}
                   className="cursor-pointer"
                   onSelect={() => {
                     setId(selection.id === id ? "" : selection.id);
