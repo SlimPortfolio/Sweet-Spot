@@ -28,18 +28,24 @@ import {
 type SelectionObject = {
   value: string;
   label: string;
+  id: number;
+  songLowNote?: string;
+  songHighNote?: string;
+  songOriginalKey?: string;
+  vocalistLowNote?: string;
+  vocalistHighNote?: string;
 };
 type KFCProps = {
   selections: SelectionObject[];
   filterPlaceholder?: string;
   placeholder: string;
   iconName?: string;
+  selectedState: React.Dispatch<React.SetStateAction<object>>;
 };
 
 export function KFComboBox(props: KFCProps) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
-  console.log(props);
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -52,7 +58,8 @@ export function KFComboBox(props: KFCProps) {
           //text-lg
         >
           {value
-            ? props.selections.find((selection) => selection.value === value)
+            ? //label is where we will find what is being displayed.
+              props.selections.find((selection) => selection.value === value)
                 ?.label
             : props.placeholder}
           {props.iconName === "music" ? (
@@ -93,6 +100,7 @@ export function KFComboBox(props: KFCProps) {
                   className="cursor-pointer"
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue);
+                    props.selectedState(selection);
                     setOpen(false);
                   }}
                 >
