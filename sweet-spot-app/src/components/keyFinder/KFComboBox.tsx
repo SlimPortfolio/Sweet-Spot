@@ -39,7 +39,7 @@ type KFCProps = {
   filterPlaceholder?: string;
   placeholder: string;
   iconName?: string;
-  selectedState: React.Dispatch<React.SetStateAction<object>>;
+  selectedState: React.Dispatch<React.SetStateAction<SelectionObject>>;
 };
 
 //KFCombo Box allows the user to pass through an array of objects to select from
@@ -109,6 +109,7 @@ export function KFComboBox(props: KFCProps) {
                   className="cursor-pointer"
                   onSelect={() => {
                     setId(selection.id === id ? "" : selection.id);
+                    console.log(selection);
                     props.selectedState(selection);
                     setOpen(false);
                   }}
