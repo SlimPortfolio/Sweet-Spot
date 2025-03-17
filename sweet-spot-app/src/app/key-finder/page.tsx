@@ -306,7 +306,6 @@ export default function KeyFinder() {
       //eventually go for a space on the left and right
       //eventually can leave space for alternative keys
     });
-  console.log(JSON.stringify(suggestedSongDetails));
   //card is working
   return (
     <div className="flex w-full h-full">

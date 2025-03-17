@@ -1,3 +1,7 @@
+Next Task: 
+-Work on right side of the key finder page, to show the results
+-potentially could do an arrow tabbing type of deal, or even a carousel that the user can swipe through
+
 
 need to work on the fact that the status is not updating whenever we unselect a song. 
 
