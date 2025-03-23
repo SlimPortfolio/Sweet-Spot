@@ -84,6 +84,7 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
       suggestedKey: calculateKey(),
       originalKey: selectedSong.songOriginalKey,
     });
+    console.log(selectedSong, selectedVocalist);
   }
 
   //helper functions
@@ -161,7 +162,8 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
             iconName="music"
             placeholder="Select a Song"
             filterPlaceholder="Search Songs"
-            selectedState={setSelectedSong}
+            setSelectedState={setSelectedSong}
+            selectedState={selectedSong}
           />
         </div>
         <div className="mb-4">
@@ -170,7 +172,8 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
             iconName="mic-vocal"
             placeholder="Select a Vocalist"
             filterPlaceholder="Search Vocalists"
-            selectedState={setSelectedVocalist}
+            setSelectedState={setSelectedVocalist}
+            selectedState={selectedVocalist}
           />
         </div>
         <div className="flex">

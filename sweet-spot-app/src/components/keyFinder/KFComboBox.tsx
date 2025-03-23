@@ -39,7 +39,8 @@ type KFCProps = {
   filterPlaceholder?: string;
   placeholder: string;
   iconName?: string;
-  selectedState: React.Dispatch<React.SetStateAction<SelectionObject>>;
+  setSelectedState: React.Dispatch<React.SetStateAction<SelectionObject>>;
+  selectedState: SelectionObject;
 };
 
 //KFCombo Box allows the user to pass through an array of objects to select from
@@ -110,8 +111,19 @@ export function KFComboBox(props: KFCProps) {
                   onSelect={() => {
                     setId(selection.id === id ? "" : selection.id);
                     console.log(selection);
-                    props.selectedState(selection);
+                    props.setSelectedState(selection);
+                    console.log(props.selectedState);
                     setOpen(false);
+                    if (props.selectedState === selection) {
+                      props.setSelectedState({
+                        label: "",
+                        id: "default",
+                        songLowNote: "",
+                        songHighNote: "",
+                        songOriginalKey: "",
+                      });
+                      console.log("set it as blank");
+                    }
                   }}
                 >
                   <Check
