@@ -314,9 +314,8 @@ export default function KeyFinder() {
         <KeyFinderForm setSuggestionDetails={setSuggestedSongDetails} />
         <h1>Section #1</h1>
       </div>
-      <div className="bg-green-100" style={{ width: "50%" }}>
+      <div className="flex justify-center h-full" style={{ width: "50%" }}>
         <KeyFinderResult />
-        <h1>Section #2</h1>
       </div>
     </div>
   );
