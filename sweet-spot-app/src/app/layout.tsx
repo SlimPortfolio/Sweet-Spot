@@ -44,7 +44,6 @@ export default function RootLayout({
           <div
             style={{
               flex: "1",
-              backgroundColor: "red",
               paddingBottom: "96px",
             }}
           >

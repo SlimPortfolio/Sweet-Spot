@@ -1,0 +1,13 @@
+Next Task: 
+-Work on right side of the key finder page, to show the results
+-potentially could do an arrow tabbing type of deal, or even a carousel that the user can swipe through
+
+
+need to work on the fact that the status is not updating whenever we unselect a song. 
+
+
+//TODO: handle Advanced Search Settings
+//TODO: handle custom vocalists
+//next feature to work on is visualization of the lower end and higher end to see what can be navigated between.
+//we should build out a suggestion setter here, that will take in a suggestion object from the form, and then that information can populate on the green side.
+//put the api call for the songs and singers inside of the keyfinderform component

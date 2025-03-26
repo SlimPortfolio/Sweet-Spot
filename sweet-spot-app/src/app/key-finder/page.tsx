@@ -2,12 +2,14 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import KeyFinderForm from "@/components/keyFinder/KeyFinderForm";
 import {
   allNotes,
   octaveDictionary,
   valueToOctaveDictionary,
   guitarFriendlySuggestion,
 } from "@/utils/key-calculation";
+import KeyFinderResult from "@/components/keyFinder/KeyFinderResult";
 
 export default function KeyFinder() {
   let listOfSongs = [
@@ -290,84 +292,35 @@ export default function KeyFinder() {
     optimalKey: false,
     //maybe include keys to avoid here
   });
-  const [customVocalist, setcCustomVocalist] = useState({
-    isEnabled: false,
-    lowNote: "",
-    highNote: "",
-    name: "",
-  });
-
-  //create handler functions for inputs
-  function handleSelectedVocalist() {}
-  function handleSelectedSong() {}
-  function handleAdvancedSettings() {}
-  function handleCustomVocalist() {}
-
-  //create functions for the outputs
-  //->helper functions for calculations
-  function intNote(note: string) {
-    const octave = note.slice(-1);
-    const intValue =
-      Number(octave) * 12 +
-      octaveDictionary.get(note.substring(0, note.length - 1));
-    return intValue;
-  }
-  function calculateNoteGap(note1: string, note2: string) {
-    return intNote(note2) - intNote(note1);
-  }
-
-  //-> functions to return values or run tests
-  function getSuggestedKey() {
-    let rangeSong = calculateNoteGap(
-      selectedSong.lowNote,
-      selectedSong.highNote
-    );
-    let rangeVocalist = calculateNoteGap(
-      selectedVocalist.lowNote,
-      selectedVocalist.highNote
-    );
-    let suggestedKey = "";
-    let suggestedKeyValue;
-    if (rangeSong > rangeVocalist) {
-      suggestedKey = "Song is Unsingable";
-    }
-    let highNoteGap = calculateNoteGap(
-      selectedVocalist.highNote,
-      selectedSong.highNote
-    );
-    if (rangeSong === rangeVocalist || rangeVocalist - rangeSong === 1) {
-      suggestedKeyValue =
-        octaveDictionary.get(selectedSong.originalKey) - highNoteGap;
-    } else if (rangeVocalist - rangeSong >= 3) {
-      suggestedKeyValue =
-        octaveDictionary.get(selectedSong.originalKey) - highNoteGap - 2;
-    } else {
-      suggestedKeyValue =
-        octaveDictionary.get(selectedSong.originalKey) - highNoteGap - 1;
-    }
-    suggestedKeyValue = ((suggestedKeyValue % 12) + 12) % 12;
-    suggestedKey = valueToOctaveDictionary.get(suggestedKeyValue);
-
-    //adding logic for suggesting a better key if possible
-    if (
-      rangeVocalist - rangeSong >= 3 &&
-      guitarFriendlySuggestion.get(suggestedKey) != null &&
-      advancedSettings.isGuitarFriendly == true
-    ) {
-      suggestedKey = guitarFriendlySuggestion.get(suggestedKey);
-    }
-    return suggestedKey;
-  }
-  // getSuggestedKey();
-
-  //next feature to work on is visualization of the lower end and higher end to see what can be navigated between.
+  type suggestionDetails = {
+    songName: string;
+    artist: string | undefined;
+    vocalistName: string;
+    suggestedKey: string;
+    originalKey: string | undefined;
+  };
+  const [suggestedSongDetails, setSuggestedSongDetails] =
+    useState<suggestionDetails>({
+      songName: "",
+      artist: "",
+      vocalistName: "",
+      suggestedKey: "",
+      originalKey: "",
+      //eventually go for a space on the left and right
+      //eventually can leave space for alternative keys
+    });
   return (
     <div className="flex w-full h-full">
-      <div className="bg-rose-200 flex-grow">
+      <div style={{ width: "50%" }}>
+        <KeyFinderForm setSuggestionDetails={setSuggestedSongDetails} />
         <h1>Section #1</h1>
       </div>
-      <div className="bg-green-800 flex-grow">
-        <h1>Section #2</h1>
+      <div className="flex justify-center h-full" style={{ width: "50%" }}>
+        {suggestedSongDetails.suggestedKey !== "" ? (
+          <KeyFinderResult resultDetails={suggestedSongDetails} />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
