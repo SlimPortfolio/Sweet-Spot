@@ -287,11 +287,12 @@ export default function KeyFinder() {
     originalKey: "A#",
     songName: "This is Amazing Grace",
   });
-  const [advancedSettings, setAdvancedSettings] = useState({
-    isGuitarFriendly: true,
-    optimalKey: false,
-    //maybe include keys to avoid here
-  });
+  //moving advancedSettings in with the KeyFinderForm.tsx file
+  // const [advancedSettings, setAdvancedSettings] = useState({
+  //   isGuitarFriendly: true,
+  //   optimalKey: false,
+  //   //maybe include keys to avoid here
+  // });
   type suggestionDetails = {
     songName: string;
     artist: string | undefined;

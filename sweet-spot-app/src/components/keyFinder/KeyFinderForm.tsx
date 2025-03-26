@@ -78,6 +78,11 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
     vocalistHighNote: "",
   });
   const [isSubmitError, setIsSubmitError] = useState(false);
+  const [advancedSettings, setAdvancedSettings] = useState({
+    isGuitarFriendly: true,
+    optimalKey: false,
+    //maybe include keys to avoid here
+  });
   function testFunction() {
     console.log("selected from test: ", selectedSong, selectedVocalist);
   }
@@ -87,7 +92,6 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
       console.log("submission error");
       return;
     }
-    console.log(isSubmitError);
     props.setSuggestionDetails({
       songName: selectedSong.label,
       artist: selectedSong.artist,
@@ -95,7 +99,6 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
       suggestedKey: calculateKey(),
       originalKey: selectedSong.songOriginalKey,
     });
-    console.log(selectedSong, selectedVocalist);
   }
 
   //helper functions
@@ -189,7 +192,10 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
         </div>
         <div className="flex">
           <Button onClick={() => submitForm()}>Submit</Button>
-          <KFPopover />
+          <KFPopover
+            advancedSettings={advancedSettings}
+            advancedSettingsSetter={setAdvancedSettings}
+          />
         </div>
         <button onClick={testFunction}>Click me to check</button>
         <p id="error-status-message" className="text-red-600 font-semibold">

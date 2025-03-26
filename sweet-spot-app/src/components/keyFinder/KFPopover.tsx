@@ -15,7 +15,27 @@ import {
 } from "@/components/ui/tooltip";
 
 import { CircleHelp, Settings2 } from "lucide-react";
-export function KFPopover() {
+type advancedSettingsProps = {
+  isGuitarFriendly: boolean;
+  optimalKey: boolean;
+};
+type KFPopoverProps = {
+  advancedSettings: advancedSettingsProps;
+  advancedSettingsSetter: React.Dispatch<
+    React.SetStateAction<advancedSettingsProps>
+  >;
+};
+export function KFPopover(props: KFPopoverProps) {
+  function handleOptimizedKeySwitch(checked: boolean) {
+    // props.advancedSettings({
+    //   isGuitarFriendly: true,
+    //   optimalKey: true,
+    // });
+    props.advancedSettingsSetter((previousState) => ({
+      ...previousState,
+      optimalKey: checked,
+    }));
+  }
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -37,8 +57,12 @@ export function KFPopover() {
           </div>
           <div className="grid gap-2">
             <div className="grid grid-cols-3 items-center gap-4">
-              <Switch id="widthSwitch" />
-              <Label htmlFor="widthSwitch">
+              <Switch
+                id="optimizedKeySwitch"
+                onCheckedChange={handleOptimizedKeySwitch}
+                checked={props.advancedSettings.optimalKey}
+              />
+              <Label htmlFor="optimizedKeySwitch">
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger>Optimized Key</TooltipTrigger>
