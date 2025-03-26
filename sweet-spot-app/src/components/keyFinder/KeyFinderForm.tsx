@@ -77,12 +77,14 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
     vocalistLowNote: "",
     vocalistHighNote: "",
   });
-  const [isSubmitError, setIsSubmitError] = useState(true);
+  const [isSubmitError, setIsSubmitError] = useState(false);
   function testFunction() {
     console.log("selected from test: ", selectedSong, selectedVocalist);
   }
   function submitForm() {
     if (selectedSong.id === "default" || selectedVocalist.id === "default") {
+      setIsSubmitError(true);
+      console.log("submission error");
       return;
     }
     console.log(isSubmitError);
@@ -113,10 +115,10 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
   }
   function calculateKey() {
     if (selectedSong.id === "default" || selectedVocalist.id === "default") {
-      setIsSubmitError(false);
+      setIsSubmitError(true);
       //set the state of the status message.
     } else {
-      setIsSubmitError(true);
+      setIsSubmitError(false);
     }
     //insert logic here
     let rangeSong = calculateNoteGap(
@@ -191,7 +193,7 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
         </div>
         <button onClick={testFunction}>Click me to check</button>
         <p id="error-status-message" className="text-red-600 font-semibold">
-          {isSubmitError ? "" : "Please Select a Song and Vocalist"}
+          {isSubmitError ? "Please Select a Song and Vocalist" : ""}
         </p>
       </div>
     </div>
