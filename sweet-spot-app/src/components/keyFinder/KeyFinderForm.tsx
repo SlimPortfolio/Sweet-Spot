@@ -11,6 +11,7 @@ import {
 const songs = [
   {
     label: "King of Kings",
+    artist: "Hillsong Worship",
     id: "1",
     songLowNote: "C#4",
     songHighNote: "D5",
@@ -43,6 +44,7 @@ const vocalists = [
 
 type suggestionDetails = {
   songName: string;
+  artist: string | undefined;
   vocalistName: string;
   suggestedKey: string;
   originalKey: string | undefined;
@@ -54,6 +56,7 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
   interface SelectionObject {
     label: string;
     id: string;
+    artist?: string;
     songLowNote?: string;
     songHighNote?: string;
     songOriginalKey?: string;
@@ -63,6 +66,7 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
   const [selectedSong, setSelectedSong] = useState<SelectionObject>({
     label: "",
     id: "default",
+    artist: "",
     songLowNote: "",
     songHighNote: "",
     songOriginalKey: "",
@@ -73,13 +77,18 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
     vocalistLowNote: "",
     vocalistHighNote: "",
   });
-  const [loginError, setLoginError] = useState(false);
+  const [isSubmitError, setIsSubmitError] = useState(true);
   function testFunction() {
     console.log("selected from test: ", selectedSong, selectedVocalist);
   }
   function submitForm() {
+    if (selectedSong.id === "default" || selectedVocalist.id === "default") {
+      return;
+    }
+    console.log(isSubmitError);
     props.setSuggestionDetails({
       songName: selectedSong.label,
+      artist: selectedSong.artist,
       vocalistName: selectedVocalist.label,
       suggestedKey: calculateKey(),
       originalKey: selectedSong.songOriginalKey,
@@ -104,10 +113,10 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
   }
   function calculateKey() {
     if (selectedSong.id === "default" || selectedVocalist.id === "default") {
-      setLoginError(true);
+      setIsSubmitError(false);
       //set the state of the status message.
     } else {
-      setLoginError(false);
+      setIsSubmitError(true);
     }
     //insert logic here
     let rangeSong = calculateNoteGap(
@@ -182,7 +191,7 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
         </div>
         <button onClick={testFunction}>Click me to check</button>
         <p id="error-status-message" className="text-red-600 font-semibold">
-          {loginError ? "Please Select a Song and Vocalist" : ""}
+          {isSubmitError ? "" : "Please Select a Song and Vocalist"}
         </p>
       </div>
     </div>

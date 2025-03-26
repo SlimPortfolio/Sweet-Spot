@@ -294,6 +294,7 @@ export default function KeyFinder() {
   });
   type suggestionDetails = {
     songName: string;
+    artist: string | undefined;
     vocalistName: string;
     suggestedKey: string;
     originalKey: string | undefined;
@@ -301,13 +302,13 @@ export default function KeyFinder() {
   const [suggestedSongDetails, setSuggestedSongDetails] =
     useState<suggestionDetails>({
       songName: "",
+      artist: "",
       vocalistName: "",
       suggestedKey: "",
       originalKey: "",
       //eventually go for a space on the left and right
       //eventually can leave space for alternative keys
     });
-  //card is working
   return (
     <div className="flex w-full h-full">
       <div style={{ width: "50%" }}>
@@ -315,7 +316,11 @@ export default function KeyFinder() {
         <h1>Section #1</h1>
       </div>
       <div className="flex justify-center h-full" style={{ width: "50%" }}>
-        <KeyFinderResult />
+        {suggestedSongDetails.suggestedKey !== "" ? (
+          <KeyFinderResult resultDetails={suggestedSongDetails} />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
