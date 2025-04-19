@@ -353,6 +353,7 @@ type suggestionDetails = {
   vocalistName: string;
   suggestedKey: string;
   originalKey: string | undefined;
+  suggestion: object;
 };
 type KeyFinderFormProps = {
   setSuggestionDetails: React.Dispatch<React.SetStateAction<suggestionDetails>>;
@@ -403,6 +404,11 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
       vocalistName: selectedVocalist.label,
       suggestedKey: calculateKey(),
       originalKey: selectedSong.songOriginalKey,
+      suggestion: {
+        suggestedKey: "A",
+        higherKeys: ["A#"],
+        lowerKeys: ["G#"],
+      },
     });
   }
 
@@ -450,12 +456,15 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
       selectedSong.songHighNote
     );
     if (rangeSong === rangeVocalist || rangeVocalist - rangeSong === 1) {
+      //case of 1 gap, there is no higher key, one lower key
       suggestedKeyValue =
         octaveDictionary.get(selectedSong.songOriginalKey) - highNoteGap;
     } else if (rangeVocalist - rangeSong >= 3) {
+      //case of 3 or more, there is two higher keys, and at least 1 lower key
       suggestedKeyValue =
         octaveDictionary.get(selectedSong.songOriginalKey) - highNoteGap - 2;
     } else {
+      //case of 2 gap, one high one low
       suggestedKeyValue =
         octaveDictionary.get(selectedSong.songOriginalKey) - highNoteGap - 1;
     }
@@ -468,6 +477,8 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
       guitarFriendlySuggestionUp.get(suggestedKey) != null &&
       !advancedSettings.optimalKey
     ) {
+      //case of 2, 2 lower keys
+      //case of 3 or more, 2 high and a few lower
       suggestedKey = guitarFriendlySuggestionUp.get(suggestedKey);
     }
     if (
@@ -475,6 +486,7 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
       guitarFriendlySuggestionDown.get(suggestedKey) != null &&
       !advancedSettings.optimalKey
     ) {
+      //case of 1, 1 higher key
       suggestedKey = guitarFriendlySuggestionDown.get(suggestedKey);
     }
     return suggestedKey;

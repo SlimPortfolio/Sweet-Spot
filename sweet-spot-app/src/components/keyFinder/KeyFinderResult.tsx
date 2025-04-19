@@ -1,3 +1,4 @@
+import { capoSuggestion } from "@/utils/key-calculation";
 import {
   Card,
   CardContent,
@@ -39,6 +40,17 @@ export default function KeyFinderResult(props: resultDetailsProps) {
             </div> */}
             <div className="bg-orange-400 text-2xl font-bold text-white p-0 px-1 max-w-fit rounded-sm">
               {props.resultDetails.suggestedKey}
+            </div>
+            <div>
+              {/* Guitar Voicing: Key of
+              {capoSuggestion.get(props.resultDetails.suggestedKey).chordFamily}
+              Capo
+              {capoSuggestion.get(props.resultDetails.suggestedKey).capoValue} */}
+              {`Guitar Voicing: Key of ${
+                capoSuggestion.get(props.resultDetails.suggestedKey).chordFamily
+              } - Capo ${
+                capoSuggestion.get(props.resultDetails.suggestedKey).capoValue
+              }`}
             </div>
           </div>
         </CardContent>

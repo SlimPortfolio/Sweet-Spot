@@ -143,3 +143,61 @@ guitarFriendlySuggestionDown.set("F", "E");
 // guitarFriendlySuggestionDown.set("F#", "G");
 guitarFriendlySuggestionDown.set("G#", "G");
 guitarFriendlySuggestionDown.set("A#", "A");
+
+//capo suggestions: C and G are probably the main ones that we
+//A, A#, B, C, C#, D, D#, E, F, F#, G, G#
+//G, G,  G, C, C,  C, C,  C, E, E,  G, G
+//A  -> G Capo 2
+//A# -> G Capo 3
+//B  -> G Capo 4
+//C  -> C
+//C# -> C Capo 1
+//D  -> C Capo 2
+//D# -> C Capo 3
+//E  -> C Capo 4
+//F  -> E Capo 1
+//F# -> E Capo 2
+//G  -> G
+//G# -> G Capo 1
+//Key, Value -> Suggested Key, {Chord Family, Capo}
+export let capoSuggestion = new Map();
+capoSuggestion.set("G#", {
+  chordFamily: "G",
+  capoValue: "1",
+});
+capoSuggestion.set("A", {
+  chordFamily: "G",
+  capoValue: "2",
+});
+capoSuggestion.set("A#", {
+  chordFamily: "G",
+  capoValue: "3",
+});
+capoSuggestion.set("B", {
+  chordFamily: "G",
+  capoValue: "4",
+});
+capoSuggestion.set("C#", {
+  chordFamily: "C",
+  capoValue: "1",
+});
+capoSuggestion.set("D", {
+  chordFamily: "C",
+  capoValue: "2",
+});
+capoSuggestion.set("D#", {
+  chordFamily: "C",
+  capoValue: "3",
+});
+capoSuggestion.set("E", {
+  chordFamily: "C",
+  capoValue: "4",
+});
+capoSuggestion.set("F#", {
+  chordFamily: "E",
+  capoValue: "1",
+});
+capoSuggestion.set("F#", {
+  chordFamily: "E",
+  capoValue: "2",
+});

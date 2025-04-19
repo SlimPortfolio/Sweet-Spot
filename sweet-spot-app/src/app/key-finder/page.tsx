@@ -299,6 +299,7 @@ export default function KeyFinder() {
     vocalistName: string;
     suggestedKey: string;
     originalKey: string | undefined;
+    suggestion: object;
   };
   const [suggestedSongDetails, setSuggestedSongDetails] =
     useState<suggestionDetails>({
@@ -307,6 +308,11 @@ export default function KeyFinder() {
       vocalistName: "",
       suggestedKey: "",
       originalKey: "",
+      suggestion: {
+        suggestedKey: "",
+        higherKeys: [],
+        lowerKeys: [],
+      },
       //eventually go for a space on the left and right
       //eventually can leave space for alternative keys
     });

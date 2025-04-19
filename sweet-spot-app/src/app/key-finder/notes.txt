@@ -3,8 +3,7 @@ Current Branch:
 //next feature to work on is visualization of the lower end and higher end to see what can be navigated between.
 -Look into logic for adding in suggestions for Capos and Transpositions
 -Include how much room on each side there is, if we wanted to look at alternative keys. Maybe even have a list of all other possible keys
--Add in support for optimized key
--For now, lets try to use the optimized key and not worry so much about isGuitarFriendly setting
+
 //TODO: handle Advanced Search Settings
 
 -potentially could do an arrow tabbing type of deal, or even a carousel that the user can swipe through
@@ -14,3 +13,5 @@ Current Branch:
 //TODO: handle custom vocalists
 //put the api call for the songs and singers inside of the keyfinderform component
 //TODO:Change the Tab Icon, and also the tab Label
+-Add in support for optimized key
+-For now, lets try to use the optimized key and not worry so much about isGuitarFriendly setting
