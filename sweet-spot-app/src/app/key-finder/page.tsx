@@ -7,7 +7,7 @@ import {
   allNotes,
   octaveDictionary,
   valueToOctaveDictionary,
-  guitarFriendlySuggestion,
+  guitarFriendlySuggestionUp,
 } from "@/utils/key-calculation";
 import KeyFinderResult from "@/components/keyFinder/KeyFinderResult";
 
@@ -314,7 +314,6 @@ export default function KeyFinder() {
     <div className="flex w-full h-full">
       <div style={{ width: "50%" }}>
         <KeyFinderForm setSuggestionDetails={setSuggestedSongDetails} />
-        <h1>Section #1</h1>
       </div>
       <div className="flex justify-center h-full" style={{ width: "50%" }}>
         {suggestedSongDetails.suggestedKey !== "" ? (

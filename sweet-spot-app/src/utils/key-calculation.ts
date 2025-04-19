@@ -127,10 +127,19 @@ valueToOctaveDictionary.set(10, "A#");
 valueToOctaveDictionary.set(11, "B");
 
 //Dictionary for easy-chord options
-export let guitarFriendlySuggestion = new Map();
-guitarFriendlySuggestion.set("C#", "D");
-guitarFriendlySuggestion.set("D#", "E");
-guitarFriendlySuggestion.set("F", "E");
-guitarFriendlySuggestion.set("F#", "G");
-guitarFriendlySuggestion.set("G#", "A");
-guitarFriendlySuggestion.set("A#", "B");
+export let guitarFriendlySuggestionUp = new Map();
+guitarFriendlySuggestionUp.set("C#", "D");
+guitarFriendlySuggestionUp.set("D#", "E");
+guitarFriendlySuggestionUp.set("F", "E");
+guitarFriendlySuggestionUp.set("F#", "G");
+guitarFriendlySuggestionUp.set("G#", "A");
+guitarFriendlySuggestionUp.set("A#", "B");
+
+export let guitarFriendlySuggestionDown = new Map();
+guitarFriendlySuggestionDown.set("C#", "C");
+guitarFriendlySuggestionDown.set("D#", "D");
+guitarFriendlySuggestionDown.set("F", "E");
+//removing F# since this will be used when the key can only be shifted 1 down
+// guitarFriendlySuggestionDown.set("F#", "G");
+guitarFriendlySuggestionDown.set("G#", "G");
+guitarFriendlySuggestionDown.set("A#", "A");
