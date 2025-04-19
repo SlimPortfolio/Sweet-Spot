@@ -293,20 +293,23 @@ export default function KeyFinder() {
   //   optimalKey: false,
   //   //maybe include keys to avoid here
   // });
+  type suggestionObject = {
+    suggestedKey: string;
+    higherKeys: string[];
+    lowerKeys: string[];
+  };
   type suggestionDetails = {
     songName: string;
     artist: string | undefined;
     vocalistName: string;
-    suggestedKey: string;
     originalKey: string | undefined;
-    suggestion: object;
+    suggestion: suggestionObject;
   };
   const [suggestedSongDetails, setSuggestedSongDetails] =
     useState<suggestionDetails>({
       songName: "",
       artist: "",
       vocalistName: "",
-      suggestedKey: "",
       originalKey: "",
       suggestion: {
         suggestedKey: "",
@@ -322,7 +325,7 @@ export default function KeyFinder() {
         <KeyFinderForm setSuggestionDetails={setSuggestedSongDetails} />
       </div>
       <div className="flex justify-center h-full" style={{ width: "50%" }}>
-        {suggestedSongDetails.suggestedKey !== "" ? (
+        {suggestedSongDetails.suggestion.suggestedKey !== "" ? (
           <KeyFinderResult resultDetails={suggestedSongDetails} />
         ) : (
           ""

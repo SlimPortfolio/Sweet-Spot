@@ -126,6 +126,20 @@ valueToOctaveDictionary.set(9, "A");
 valueToOctaveDictionary.set(10, "A#");
 valueToOctaveDictionary.set(11, "B");
 
+export let octaveArray = [
+  "C",
+  "C#",
+  "D",
+  "D#",
+  "E",
+  "F",
+  "F#",
+  "G",
+  "G#",
+  "A",
+  "A#",
+  "B",
+];
 //Dictionary for easy-chord options
 export let guitarFriendlySuggestionUp = new Map();
 guitarFriendlySuggestionUp.set("C#", "D");
@@ -144,22 +158,6 @@ guitarFriendlySuggestionDown.set("F", "E");
 guitarFriendlySuggestionDown.set("G#", "G");
 guitarFriendlySuggestionDown.set("A#", "A");
 
-//capo suggestions: C and G are probably the main ones that we
-//A, A#, B, C, C#, D, D#, E, F, F#, G, G#
-//G, G,  G, C, C,  C, C,  C, E, E,  G, G
-//A  -> G Capo 2
-//A# -> G Capo 3
-//B  -> G Capo 4
-//C  -> C
-//C# -> C Capo 1
-//D  -> C Capo 2
-//D# -> C Capo 3
-//E  -> C Capo 4
-//F  -> E Capo 1
-//F# -> E Capo 2
-//G  -> G
-//G# -> G Capo 1
-//Key, Value -> Suggested Key, {Chord Family, Capo}
 export let capoSuggestion = new Map();
 capoSuggestion.set("G#", {
   chordFamily: "G",

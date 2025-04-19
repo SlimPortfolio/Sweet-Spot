@@ -8,6 +8,7 @@ import {
   guitarFriendlySuggestionDown,
   octaveDictionary,
   valueToOctaveDictionary,
+  octaveArray,
 } from "@/utils/key-calculation";
 const songs = [
   {
@@ -346,14 +347,17 @@ const vocalists = [
     vocalistHighNote: "C#5",
   },
 ];
-
+type suggestionObject = {
+  suggestedKey: string;
+  higherKeys: string[];
+  lowerKeys: string[];
+};
 type suggestionDetails = {
   songName: string;
   artist: string | undefined;
   vocalistName: string;
-  suggestedKey: string;
   originalKey: string | undefined;
-  suggestion: object;
+  suggestion: suggestionObject;
 };
 type KeyFinderFormProps = {
   setSuggestionDetails: React.Dispatch<React.SetStateAction<suggestionDetails>>;
@@ -402,13 +406,8 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
       songName: selectedSong.label,
       artist: selectedSong.artist,
       vocalistName: selectedVocalist.label,
-      suggestedKey: calculateKey(),
       originalKey: selectedSong.songOriginalKey,
-      suggestion: {
-        suggestedKey: "A",
-        higherKeys: ["A#"],
-        lowerKeys: ["G#"],
-      },
+      suggestion: calculateKey(),
     });
   }
 
@@ -427,7 +426,7 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
   function calculateNoteGap(note1?: string, note2?: string) {
     return intNote(note2) - intNote(note1);
   }
-  function calculateKey() {
+  function calculateKey(): suggestionObject {
     //handle incomplete submission errors
     if (selectedSong.id === "default" || selectedVocalist.id === "default") {
       setIsSubmitError(true);
@@ -447,49 +446,76 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
     );
     let suggestedKey = "";
     let suggestedKeyValue;
+    let higherKeysCount = 0;
+    let lowerKeysCount = 0;
 
     if (rangeSong > rangeVocalist) {
-      return "Song is Unsingable";
+      return {
+        suggestedKey: "Song is Unsingable",
+        higherKeys: [],
+        lowerKeys: [],
+      };
     }
     let highNoteGap = calculateNoteGap(
       selectedVocalist.vocalistHighNote,
       selectedSong.songHighNote
     );
     if (rangeSong === rangeVocalist || rangeVocalist - rangeSong === 1) {
-      //case of 1 gap, there is no higher key, one lower key
+      if (rangeVocalist - rangeSong === 1) {
+        lowerKeysCount = 1;
+      }
       suggestedKeyValue =
         octaveDictionary.get(selectedSong.songOriginalKey) - highNoteGap;
     } else if (rangeVocalist - rangeSong >= 3) {
-      //case of 3 or more, there is two higher keys, and at least 1 lower key
       suggestedKeyValue =
         octaveDictionary.get(selectedSong.songOriginalKey) - highNoteGap - 2;
+      higherKeysCount = 2;
+      lowerKeysCount = rangeVocalist - rangeSong - 2;
     } else {
-      //case of 2 gap, one high one low
       suggestedKeyValue =
         octaveDictionary.get(selectedSong.songOriginalKey) - highNoteGap - 1;
+      higherKeysCount = 1;
+      lowerKeysCount = 1;
     }
     suggestedKeyValue = ((suggestedKeyValue % 12) + 12) % 12;
     suggestedKey = valueToOctaveDictionary.get(suggestedKeyValue);
 
     //adding logic for suggesting a better key if possible
     if (
-      (rangeVocalist - rangeSong >= 3 || rangeVocalist - rangeSong === 2) &&
-      guitarFriendlySuggestionUp.get(suggestedKey) != null &&
-      !advancedSettings.optimalKey
-    ) {
-      //case of 2, 2 lower keys
-      //case of 3 or more, 2 high and a few lower
-      suggestedKey = guitarFriendlySuggestionUp.get(suggestedKey);
-    }
-    if (
       rangeVocalist - rangeSong === 1 &&
       guitarFriendlySuggestionDown.get(suggestedKey) != null &&
       !advancedSettings.optimalKey
     ) {
-      //case of 1, 1 higher key
+      higherKeysCount += 1;
+      lowerKeysCount -= 1;
       suggestedKey = guitarFriendlySuggestionDown.get(suggestedKey);
+    } else if (
+      (rangeVocalist - rangeSong >= 3 || rangeVocalist - rangeSong === 2) &&
+      guitarFriendlySuggestionUp.get(suggestedKey) != null &&
+      !advancedSettings.optimalKey
+    ) {
+      higherKeysCount -= 1;
+      lowerKeysCount += 1;
+      suggestedKey = guitarFriendlySuggestionUp.get(suggestedKey);
     }
-    return suggestedKey;
+    let higherKeys = [];
+    let lowerKeys = [];
+    for (let i = 0; i < higherKeysCount; i++) {
+      higherKeys.push(
+        octaveArray[(octaveDictionary.get(suggestedKey) + 1 + i) % 12]
+      );
+    }
+    for (let i = 0; i < lowerKeysCount; i++) {
+      lowerKeys.push(
+        octaveArray[(octaveDictionary.get(suggestedKey) - 1 - i + 12) % 12]
+      );
+    }
+
+    return {
+      suggestedKey: suggestedKey,
+      higherKeys: higherKeys,
+      lowerKeys: lowerKeys,
+    };
   }
   return (
     <div className="justify-center flex">
