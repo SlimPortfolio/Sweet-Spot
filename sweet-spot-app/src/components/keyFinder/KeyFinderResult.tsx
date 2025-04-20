@@ -53,15 +53,18 @@ export default function KeyFinderResult(props: resultDetailsProps) {
               {props.resultDetails.suggestion.suggestedKey !=
               "Song is Unsingable" ? (
                 <div>
-                  {`Guitar Voicing: Key of ${
-                    capoSuggestion.get(
-                      props.resultDetails.suggestion.suggestedKey
-                    ).chordFamily
-                  } - Capo ${
-                    capoSuggestion.get(
-                      props.resultDetails.suggestion.suggestedKey
-                    ).capoValue
-                  }`}
+                  {props.resultDetails.suggestion.suggestedKey !== "G" &&
+                  props.resultDetails.suggestion.suggestedKey !== "C"
+                    ? `Guitar Voicing: Key of ${
+                        capoSuggestion.get(
+                          props.resultDetails.suggestion.suggestedKey
+                        ).chordFamily
+                      } - Capo ${
+                        capoSuggestion.get(
+                          props.resultDetails.suggestion.suggestedKey
+                        ).capoValue
+                      }`
+                    : null}
                   <p>
                     {`Higher Keys Array: ${props.resultDetails.suggestion.higherKeys}`}
                   </p>
