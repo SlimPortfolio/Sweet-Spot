@@ -8,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { capoSuggestion } from "@/utils/key-calculation";
 type allAltKeysProps = {
   allAltKeys: {
     key: string;
@@ -15,20 +16,39 @@ type allAltKeysProps = {
   }[];
 };
 export function AltKeysCarousel(props: allAltKeysProps) {
-  console.log(props.allAltKeys);
   let startIndex = props.allAltKeys.findIndex((object) => object.delta === 0);
-  console.log("start index", startIndex);
   const [currIndex, setCurrIndex] = useState(0);
   function handleIndexUpdate(index: number) {
     setCurrIndex(index);
   }
-  console.log(currIndex);
-
+  console.log(JSON.stringify(props.allAltKeys));
+  console.log(
+    JSON.stringify(capoSuggestion.get(props.allAltKeys[currIndex].key))
+  );
+  let carouselCapoSuggestion = capoSuggestion.get(
+    props.allAltKeys[currIndex].key
+  );
+  console.log("differenetial", currIndex - startIndex);
+  let differential = currIndex - startIndex;
   return (
-    <div className="flex flex-col items-center justify-center mt-[2rem] ">
-      <span>Other Singable Keys</span>
+    <div className="flex flex-col items-center mx-6">
+      <span className="font-semibold text-lg">Other Singable Keys</span>
+      <p className={"text-lg"}>
+        <span>Differential: </span>
+        <span
+          className={
+            differential < 0
+              ? "text-red-600"
+              : differential > 0
+              ? "text-green-800"
+              : "black"
+          }
+        >
+          {differential > 0 ? `+${differential}` : differential}
+        </span>
+      </p>
       <Carousel
-        className="w-[200px]"
+        className="w-[140px]"
         opts={{ startIndex: startIndex }}
         indexHandle={handleIndexUpdate}
       >
@@ -39,10 +59,10 @@ export function AltKeysCarousel(props: allAltKeysProps) {
                 key={index}
                 className="flex justify-center items-center"
               >
-                <div className="p-1 w-[50px]">
-                  <Card className="h-[50px] items-center justify-center flex">
+                <div className="">
+                  <Card className="w-[40px] h-[40px] items-center justify-center flex">
                     <CardContent className="flex items-center justify-center p-6">
-                      <span className="text-4xl font-semibold">
+                      <span className="text-2xl font-semibold">
                         {altKey.key}
                       </span>
                     </CardContent>
@@ -52,12 +72,15 @@ export function AltKeysCarousel(props: allAltKeysProps) {
             );
           })}
         </CarouselContent>
-        <CarouselPrevious
-          className="absolute left-[2rem] top-1/2 transform -translate-y-1/2 z-10"
-          id="carouselButtonPrev"
-        />
-        <CarouselNext className="absolute right-[2rem] top-1/2 transform -translate-y-1/2 z-10" />
+        <CarouselPrevious className="absolute left-[1rem] top-1/2 transform -translate-y-1/2 z-10" />
+        <CarouselNext className="absolute right-[1rem] top-1/2 transform -translate-y-1/2 z-10" />
       </Carousel>
+      <p className="text-sm">
+        {props.allAltKeys[currIndex].key !== "C" &&
+        props.allAltKeys[currIndex].key !== "G"
+          ? `${carouselCapoSuggestion?.chordFamily} Chords - Capo: ${carouselCapoSuggestion?.capoValue}`
+          : "No Capo"}
+      </p>
     </div>
   );
 }

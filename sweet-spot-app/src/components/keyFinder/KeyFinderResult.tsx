@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "../ui/card";
 import { AltKeysCarousel } from "./altKeysCarousel";
+import { Guitar } from "lucide-react";
 type suggestionObject = {
   suggestedKey: string;
   higherKeys: string[];
@@ -66,15 +67,33 @@ export default function KeyFinderResult(props: resultDetailsProps) {
             <div className="bg-orange-400 text-2xl font-bold text-white p-0 px-1 max-w-fit rounded-sm">
               {props.resultDetails.suggestion.suggestedKey}
             </div>
-            <div>
-              {/* Guitar Voicing: Key of
-              {capoSuggestion.get(props.resultDetails.suggestedKey).chordFamily}
-              Capo
-              {capoSuggestion.get(props.resultDetails.suggestedKey).capoValue} */}
+            <div className="flex m-6 p-6">
               {props.resultDetails.suggestion.suggestedKey !=
               "Song is Unsingable" ? (
-                <div>
-                  {props.resultDetails.suggestion.suggestedKey !== "G" &&
+                <div className="flex flex-col items-center mx-6">
+                  <p className="font-semibold text-lg">Alternate Voicings</p>
+                  <p className="text-lg">
+                    {props.resultDetails.suggestion.suggestedKey !== "G" &&
+                    props.resultDetails.suggestion.suggestedKey !== "C"
+                      ? `${
+                          capoSuggestion.get(
+                            props.resultDetails.suggestion.suggestedKey
+                          ).chordFamily
+                        } Chords`
+                      : `${props.resultDetails.suggestion.suggestedKey} Chords`}
+                  </p>
+                  <Guitar size={"40px"} />
+                  <p className="text-sm">
+                    {props.resultDetails.suggestion.suggestedKey !== "G" &&
+                    props.resultDetails.suggestion.suggestedKey !== "C"
+                      ? `Capo ${
+                          capoSuggestion.get(
+                            props.resultDetails.suggestion.suggestedKey
+                          ).capoValue
+                        }`
+                      : "No Capo"}
+                  </p>
+                  {/* {props.resultDetails.suggestion.suggestedKey !== "G" &&
                   props.resultDetails.suggestion.suggestedKey !== "C"
                     ? `Guitar Voicing: Key of ${
                         capoSuggestion.get(
@@ -85,13 +104,7 @@ export default function KeyFinderResult(props: resultDetailsProps) {
                           props.resultDetails.suggestion.suggestedKey
                         ).capoValue
                       }`
-                    : null}
-                  <p>
-                    {`Higher Keys Array: ${props.resultDetails.suggestion.higherKeys}`}
-                  </p>
-                  <p>
-                    {`Lower Keys Array: ${props.resultDetails.suggestion.lowerKeys}`}
-                  </p>
+                    : null} */}
                 </div>
               ) : null}
               <AltKeysCarousel allAltKeys={allAltKeys} />
