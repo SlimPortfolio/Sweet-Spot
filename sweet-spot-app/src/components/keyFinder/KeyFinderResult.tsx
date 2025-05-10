@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import { AltKeysCarousel } from "./altKeysCarousel";
 type suggestionObject = {
   suggestedKey: string;
   higherKeys: string[];
@@ -24,6 +25,26 @@ type resultDetailsProps = {
   resultDetails: suggestionDetails;
 };
 export default function KeyFinderResult(props: resultDetailsProps) {
+  let lowerKeysWithDelta = props.resultDetails.suggestion.lowerKeys.map(
+    (key, index) => {
+      return {
+        key: key,
+        delta: -1 - index,
+      };
+    }
+  );
+  let higherKeysWithDelta = props.resultDetails.suggestion.higherKeys.map(
+    (key, index) => {
+      return {
+        key: key,
+        delta: 1 + index,
+      };
+    }
+  );
+  let allAltKeys = lowerKeysWithDelta
+    .concat(higherKeysWithDelta)
+    .concat([{ key: props.resultDetails.suggestion.suggestedKey, delta: 0 }])
+    .sort((a, b) => a.delta - b.delta);
   return (
     <div className="w-full h-full flex">
       {/* <h1>here is some initial information</h1> */}
@@ -73,6 +94,7 @@ export default function KeyFinderResult(props: resultDetailsProps) {
                   </p>
                 </div>
               ) : null}
+              <AltKeysCarousel allAltKeys={allAltKeys} />
             </div>
           </div>
         </CardContent>

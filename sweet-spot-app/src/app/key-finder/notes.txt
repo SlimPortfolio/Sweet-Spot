@@ -5,6 +5,7 @@ Current Branch:
 -style additional keys suggestions
 -potentially could do an arrow tabbing type of deal, or even a carousel that the user can swipe through for past searches
 -create an array of objects to store past suggestions, or create a button that will pull up suggestion history
+-Style a little closer to the actual purple theme
 
 //TODO: handle custom vocalists
 //put the api call for the songs and singers inside of the keyfinderform component
