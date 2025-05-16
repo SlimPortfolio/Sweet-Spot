@@ -191,7 +191,7 @@ capoSuggestion.set("E", {
   chordFamily: "C",
   capoValue: "4",
 });
-capoSuggestion.set("F#", {
+capoSuggestion.set("F", {
   chordFamily: "E",
   capoValue: "1",
 });
