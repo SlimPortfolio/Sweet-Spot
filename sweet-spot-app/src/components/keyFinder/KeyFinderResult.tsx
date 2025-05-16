@@ -9,6 +9,7 @@ import {
 } from "../ui/card";
 import { AltKeysCarousel } from "./altKeysCarousel";
 import { Guitar } from "lucide-react";
+import { Separator } from "../ui/separator";
 type suggestionObject = {
   suggestedKey: string;
   higherKeys: string[];
@@ -49,72 +50,73 @@ export default function KeyFinderResult(props: resultDetailsProps) {
   return (
     <div className="w-full h-full flex">
       {/* <h1>here is some initial information</h1> */}
-      <Card className="w-3/5 h-5/6 bg-slate-100 border-black">
-        <CardHeader>
-          <CardTitle className="text-center">
-            {props.resultDetails.songName}
-          </CardTitle>
-          <CardDescription className="text-center">
-            {props.resultDetails.artist} | CCLI: 1234576
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col items-center">
-            <p>Recommended Key for {props.resultDetails.vocalistName} is:</p>
-            {/* <div>
-              <span className="bg-orange-500 text-2xl text-white p-8">B</span>
-            </div> */}
-            <div className="bg-orange-400 text-2xl font-bold text-white p-0 px-1 max-w-fit rounded-sm">
-              {props.resultDetails.suggestion.suggestedKey}
+      {/* <Card className="w-3/5 h-5/6 bg-slate-50 shadow-md"> */}
+      <Card className="bg-slate-50 shadow-md h-fit">
+        <div className="flex flex-col justify-center align-center h-full">
+          <CardHeader>
+            <CardTitle className="text-center">
+              {props.resultDetails.songName}
+            </CardTitle>
+            <CardDescription className="text-center">
+              {props.resultDetails.artist} | CCLI: 1234576TBD
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col items-center">
+              <Separator />
+              <p className="text-xl mt-4">
+                Recommended Key for{" "}
+                <span className="font-semibold">
+                  {props.resultDetails.vocalistName}
+                </span>{" "}
+                is:
+              </p>
+              <div className="bg-pink-500 text-4xl font-bold text-white mt-1 pt-1 pb-2 px-3 max-w-fit rounded-sm flex">
+                <span>{props.resultDetails.suggestion.suggestedKey}</span>
+              </div>
+              <div className="flex w-full">
+                {props.resultDetails.suggestion.suggestedKey !=
+                "Song is Unsingable" ? (
+                  <div className="flex flex-col w-full mt-8">
+                    <Separator />
+                    <div className="flex items-center w-full justify-around mt-4">
+                      <div className="flex flex-col items-center flex-grow">
+                        <p className="font-semibold text-md text-center">
+                          Alternate Voicings
+                        </p>
+                        <p className="text-md">
+                          {props.resultDetails.suggestion.suggestedKey !==
+                            "G" &&
+                          props.resultDetails.suggestion.suggestedKey !== "C"
+                            ? `${
+                                capoSuggestion.get(
+                                  props.resultDetails.suggestion.suggestedKey
+                                ).chordFamily
+                              } Chords`
+                            : `${props.resultDetails.suggestion.suggestedKey} Chords`}
+                        </p>
+                        <Guitar size={"40px"} color="#fabf1e" />
+                        <p className="text-sm italic">
+                          {props.resultDetails.suggestion.suggestedKey !==
+                            "G" &&
+                          props.resultDetails.suggestion.suggestedKey !== "C"
+                            ? `Capo ${
+                                capoSuggestion.get(
+                                  props.resultDetails.suggestion.suggestedKey
+                                ).capoValue
+                              }`
+                            : "No Capo"}
+                        </p>
+                      </div>
+                      <AltKeysCarousel allAltKeys={allAltKeys} />
+                    </div>
+                  </div>
+                ) : null}
+              </div>
             </div>
-            <div className="flex m-6 p-6">
-              {props.resultDetails.suggestion.suggestedKey !=
-              "Song is Unsingable" ? (
-                <div className="flex flex-col items-center mx-6">
-                  <p className="font-semibold text-lg">Alternate Voicings</p>
-                  <p className="text-lg">
-                    {props.resultDetails.suggestion.suggestedKey !== "G" &&
-                    props.resultDetails.suggestion.suggestedKey !== "C"
-                      ? `${
-                          capoSuggestion.get(
-                            props.resultDetails.suggestion.suggestedKey
-                          ).chordFamily
-                        } Chords`
-                      : `${props.resultDetails.suggestion.suggestedKey} Chords`}
-                  </p>
-                  <Guitar size={"40px"} />
-                  <p className="text-sm">
-                    {props.resultDetails.suggestion.suggestedKey !== "G" &&
-                    props.resultDetails.suggestion.suggestedKey !== "C"
-                      ? `Capo ${
-                          capoSuggestion.get(
-                            props.resultDetails.suggestion.suggestedKey
-                          ).capoValue
-                        }`
-                      : "No Capo"}
-                  </p>
-                  {/* {props.resultDetails.suggestion.suggestedKey !== "G" &&
-                  props.resultDetails.suggestion.suggestedKey !== "C"
-                    ? `Guitar Voicing: Key of ${
-                        capoSuggestion.get(
-                          props.resultDetails.suggestion.suggestedKey
-                        ).chordFamily
-                      } - Capo ${
-                        capoSuggestion.get(
-                          props.resultDetails.suggestion.suggestedKey
-                        ).capoValue
-                      }`
-                    : null} */}
-                </div>
-              ) : null}
-              <AltKeysCarousel allAltKeys={allAltKeys} />
-            </div>
-          </div>
-        </CardContent>
-        <CardFooter>
-          {/* <Button variant="outline">Cancel</Button>
-          <Button>Deploy</Button> */}
-        </CardFooter>
+          </CardContent>
+          <CardFooter></CardFooter>
+        </div>
       </Card>
     </div>
   );

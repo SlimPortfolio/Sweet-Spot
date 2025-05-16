@@ -31,9 +31,9 @@ export function AltKeysCarousel(props: allAltKeysProps) {
   console.log("differenetial", currIndex - startIndex);
   let differential = currIndex - startIndex;
   return (
-    <div className="flex flex-col items-center mx-6">
-      <span className="font-semibold text-lg">Other Singable Keys</span>
-      <p className={"text-lg"}>
+    <div className="flex flex-col items-center flex-grow">
+      <span className="font-semibold text-md">Other Singable Keys</span>
+      <p className="text-md text-center">
         <span>Differential: </span>
         <span
           className={
@@ -75,7 +75,7 @@ export function AltKeysCarousel(props: allAltKeysProps) {
         <CarouselPrevious className="absolute left-[1rem] top-1/2 transform -translate-y-1/2 z-10" />
         <CarouselNext className="absolute right-[1rem] top-1/2 transform -translate-y-1/2 z-10" />
       </Carousel>
-      <p className="text-sm">
+      <p className="text-sm italic">
         {props.allAltKeys[currIndex].key !== "C" &&
         props.allAltKeys[currIndex].key !== "G"
           ? `${carouselCapoSuggestion?.chordFamily} Chords - Capo: ${carouselCapoSuggestion?.capoValue}`
