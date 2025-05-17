@@ -10,6 +10,17 @@ import {
 import { AltKeysCarousel } from "./altKeysCarousel";
 import { Guitar } from "lucide-react";
 import { Separator } from "../ui/separator";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
+import { useEffect, useState } from "react";
+import { Button } from "../ui/button";
 type suggestionObject = {
   suggestedKey: string;
   higherKeys: string[];
@@ -27,6 +38,17 @@ type resultDetailsProps = {
   resultDetails: suggestionDetails;
 };
 export default function KeyFinderResult(props: resultDetailsProps) {
+  if (false) {
+    alert(JSON.stringify(props.resultDetails));
+  }
+
+  const [previousSuggestions, setPreviousSuggestions] = useState<
+    suggestionDetails[]
+  >([]);
+  useEffect(() => {
+    setPreviousSuggestions([...previousSuggestions, props.resultDetails]);
+    console.log(previousSuggestions);
+  }, [props.resultDetails]);
   let lowerKeysWithDelta = props.resultDetails.suggestion.lowerKeys.map(
     (key, index) => {
       return {
@@ -115,7 +137,47 @@ export default function KeyFinderResult(props: resultDetailsProps) {
               </div>
             </div>
           </CardContent>
-          <CardFooter></CardFooter>
+          <CardFooter>
+            <Dialog>
+              <DialogTrigger>Open</DialogTrigger>
+              <DialogContent className="flex h-3/4 flex-col">
+                <DialogTitle>Previous Suggestions</DialogTitle>
+                <div className="overflow-auto flex-grow">
+                  {previousSuggestions.map((object, key) => (
+                    <div key={key}>
+                      <Separator className="mt-2" />
+                      <div className="mt-2">
+                        <DialogDescription>
+                          {object.songName} | {object.artist} |{" "}
+                          {object.vocalistName}
+                        </DialogDescription>
+                        {/* {JSON.stringify(object)} */}
+                        {/* Artist: Original Key: {object.originalKey} */}
+                        {/* Song Name: {object.songName}  */}
+                        Key of {object.suggestion.suggestedKey}{" "}
+                        {/* Vocalist Name: {object.vocalistName} */}
+                        AKA{" "}
+                        {
+                          capoSuggestion.get(object.suggestion.suggestedKey)
+                            .chordFamily
+                        }{" "}
+                        Capo{" "}
+                        {
+                          capoSuggestion.get(object.suggestion.suggestedKey)
+                            .capoValue
+                        }
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div>
+                  <DialogClose className="">
+                    <div>Close</div>
+                  </DialogClose>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </CardFooter>
         </div>
       </Card>
     </div>
