@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from "../ui/card";
 import { AltKeysCarousel } from "./altKeysCarousel";
-import { Guitar } from "lucide-react";
+import { Guitar, History } from "lucide-react";
 import { Separator } from "../ui/separator";
 import {
   Dialog,
@@ -47,7 +47,6 @@ export default function KeyFinderResult(props: resultDetailsProps) {
   >([]);
   useEffect(() => {
     setPreviousSuggestions([...previousSuggestions, props.resultDetails]);
-    console.log(previousSuggestions);
   }, [props.resultDetails]);
   let lowerKeysWithDelta = props.resultDetails.suggestion.lowerKeys.map(
     (key, index) => {
@@ -77,7 +76,61 @@ export default function KeyFinderResult(props: resultDetailsProps) {
         <div className="flex flex-col justify-center align-center h-full">
           <CardHeader>
             <CardTitle className="text-center">
-              {props.resultDetails.songName}
+              {`${props.resultDetails.songName} `}
+              <Dialog>
+                <DialogTrigger className="bg-white outline outline-slate-400 p-1 rounded-full outline-[0.5px] hover:bg-slate-100 duration-500">
+                  <History size={16} />
+                </DialogTrigger>
+                <DialogContent className="flex h-3/4 flex-col">
+                  <DialogTitle>Previous Suggestions</DialogTitle>
+                  <div className="overflow-auto flex-grow">
+                    {previousSuggestions.map((object, key) => (
+                      <div key={key}>
+                        <Separator className="mt-2" />
+                        <div className="mt-2">
+                          <DialogDescription>
+                            {`${object.songName} | ${object.artist} | Suggestion For
+                            ${object.vocalistName}:`}
+                          </DialogDescription>
+                          <div className="mt-1 text-sm">
+                            <p>
+                              {`Key of `}
+                              <span className="text-white bg-orange-400 pb-0.5 px-1 rounded-sm font-bold">
+                                {object.suggestion.suggestedKey}
+                              </span>
+                            </p>
+                            <p>
+                              <span className="">
+                                {`Otherwise known as `}
+                                <span className="text-white bg-teal-400 pb-0.5 px-1 rounded-sm font-bold">
+                                  {
+                                    capoSuggestion.get(
+                                      object.suggestion.suggestedKey
+                                    ).chordFamily
+                                  }
+                                </span>
+                                <span className="font-semibold">
+                                  {` Capo `}
+                                  {
+                                    capoSuggestion.get(
+                                      object.suggestion.suggestedKey
+                                    ).capoValue
+                                  }
+                                </span>
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div>
+                    <DialogClose className="font-bold rounded-md hover:bg-slate-50 py-1 px-2">
+                      <div>Close</div>
+                    </DialogClose>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </CardTitle>
             <CardDescription className="text-center">
               {props.resultDetails.artist} | CCLI: 1234576TBD
@@ -137,47 +190,7 @@ export default function KeyFinderResult(props: resultDetailsProps) {
               </div>
             </div>
           </CardContent>
-          <CardFooter>
-            <Dialog>
-              <DialogTrigger>Open</DialogTrigger>
-              <DialogContent className="flex h-3/4 flex-col">
-                <DialogTitle>Previous Suggestions</DialogTitle>
-                <div className="overflow-auto flex-grow">
-                  {previousSuggestions.map((object, key) => (
-                    <div key={key}>
-                      <Separator className="mt-2" />
-                      <div className="mt-2">
-                        <DialogDescription>
-                          {object.songName} | {object.artist} |{" "}
-                          {object.vocalistName}
-                        </DialogDescription>
-                        {/* {JSON.stringify(object)} */}
-                        {/* Artist: Original Key: {object.originalKey} */}
-                        {/* Song Name: {object.songName}  */}
-                        Key of {object.suggestion.suggestedKey}{" "}
-                        {/* Vocalist Name: {object.vocalistName} */}
-                        AKA{" "}
-                        {
-                          capoSuggestion.get(object.suggestion.suggestedKey)
-                            .chordFamily
-                        }{" "}
-                        Capo{" "}
-                        {
-                          capoSuggestion.get(object.suggestion.suggestedKey)
-                            .capoValue
-                        }
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div>
-                  <DialogClose className="">
-                    <div>Close</div>
-                  </DialogClose>
-                </div>
-              </DialogContent>
-            </Dialog>
-          </CardFooter>
+          <CardFooter></CardFooter>
         </div>
       </Card>
     </div>

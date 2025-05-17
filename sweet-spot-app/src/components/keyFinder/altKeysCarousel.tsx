@@ -21,14 +21,9 @@ export function AltKeysCarousel(props: allAltKeysProps) {
   function handleIndexUpdate(index: number) {
     setCurrIndex(index);
   }
-  console.log(JSON.stringify(props.allAltKeys));
-  console.log(
-    JSON.stringify(capoSuggestion.get(props.allAltKeys[currIndex].key))
-  );
   let carouselCapoSuggestion = capoSuggestion.get(
-    props.allAltKeys[currIndex].key
+    props.allAltKeys[currIndex]?.key
   );
-  console.log("differenetial", currIndex - startIndex);
   let differential = currIndex - startIndex;
   return (
     <div className="flex flex-col items-center flex-grow">
@@ -57,11 +52,11 @@ export function AltKeysCarousel(props: allAltKeysProps) {
             return (
               <CarouselItem
                 key={index}
-                className="flex justify-center items-center"
+                className="flex justify-center items-center "
               >
                 <div className="">
                   <Card className="w-[40px] h-[40px] items-center justify-center flex">
-                    <CardContent className="flex items-center justify-center p-6">
+                    <CardContent className="flex items-center justify-center p-6 hover:cursor-grab">
                       <span className="text-2xl font-semibold">
                         {altKey.key}
                       </span>
@@ -76,7 +71,8 @@ export function AltKeysCarousel(props: allAltKeysProps) {
         <CarouselNext className="absolute right-[1rem] top-1/2 transform -translate-y-1/2 z-10" />
       </Carousel>
       <p className="text-sm italic">
-        {props.allAltKeys[currIndex].key !== "C" &&
+        {props.allAltKeys[currIndex] !== undefined &&
+        props.allAltKeys[currIndex].key !== "C" &&
         props.allAltKeys[currIndex].key !== "G"
           ? `${carouselCapoSuggestion?.chordFamily} Chords - Capo: ${carouselCapoSuggestion?.capoValue}`
           : "No Capo"}

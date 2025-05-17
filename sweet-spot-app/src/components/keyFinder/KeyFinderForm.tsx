@@ -393,13 +393,9 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
     optimalKey: false,
     //maybe include keys to avoid here
   });
-  // function testFunction() {
-  //   console.log("selected from test: ", selectedSong, selectedVocalist);
-  // }
   function submitForm() {
     if (selectedSong.id === "default" || selectedVocalist.id === "default") {
       setIsSubmitError(true);
-      console.log("submission error");
       return;
     }
     props.setSuggestionDetails({
@@ -414,7 +410,6 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
   //helper functions
   function intNote(note?: string) {
     if (note === undefined) {
-      console.log("note is undefined, error");
       return;
     }
     const octave = note.slice(-1);
