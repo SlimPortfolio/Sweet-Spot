@@ -69,7 +69,8 @@ export default function KeyFinderResult(props: resultDetailsProps) {
     .concat([{ key: props.resultDetails.suggestion.suggestedKey, delta: 0 }])
     .sort((a, b) => a.delta - b.delta);
   return (
-    <div className="w-full h-full flex">
+    // <div className="w-full h-full flex">
+    <div className="flex">
       {/* <h1>here is some initial information</h1> */}
       {/* <Card className="w-3/5 h-5/6 bg-slate-50 shadow-md"> */}
       <Card className="bg-slate-50 shadow-md h-fit">
