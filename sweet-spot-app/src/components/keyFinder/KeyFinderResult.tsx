@@ -70,7 +70,7 @@ export default function KeyFinderResult(props: resultDetailsProps) {
     .sort((a, b) => a.delta - b.delta);
   return (
     // <div className="w-full h-full flex">
-    <div className="flex">
+    <div className="flex justify-center">
       {/* <h1>here is some initial information</h1> */}
       {/* <Card className="w-3/5 h-5/6 bg-slate-50 shadow-md"> */}
       <Card className="bg-slate-50 shadow-md h-fit">
@@ -82,7 +82,7 @@ export default function KeyFinderResult(props: resultDetailsProps) {
                 <DialogTrigger className="bg-white outline outline-slate-400 p-1 rounded-full outline-[0.5px] hover:bg-slate-100 duration-500">
                   <History size={16} />
                 </DialogTrigger>
-                <DialogContent className="flex h-3/4 flex-col">
+                <DialogContent className="flex flex-col w-screen max-h-[70vh]">
                   <DialogTitle>Previous Suggestions</DialogTitle>
                   <div className="overflow-auto flex-grow">
                     {previousSuggestions.map((object, key) => (

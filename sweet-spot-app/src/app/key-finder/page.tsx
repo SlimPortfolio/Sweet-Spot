@@ -320,19 +320,11 @@ export default function KeyFinder() {
       //eventually can leave space for alternative keys
     });
   return (
-    <div className="flex w-full h-full">
-      {/* added support you can use for responsive design */}
-      {/* <div className="flex w-full h-full items-center flex-col"> */}
-      <div
-        className="flex bg-green-600 justify-center"
-        style={{ width: "50%" }}
-      >
+    <div className="flex w-full h-full md:justify-center md:flex-row md:items-start flex-col items-center">
+      <div className="flex justify-center mx-14">
         <KeyFinderForm setSuggestionDetails={setSuggestedSongDetails} />
       </div>
-      <div
-        className="flex justify-center h-full bg-red-600"
-        style={{ width: "50%" }}
-      >
+      <div className="flex justify-center h-full mx-4 md:mx-14 md:my-0 my-8">
         {suggestedSongDetails.suggestion.suggestedKey !== "" ? (
           <KeyFinderResult resultDetails={suggestedSongDetails} />
         ) : (

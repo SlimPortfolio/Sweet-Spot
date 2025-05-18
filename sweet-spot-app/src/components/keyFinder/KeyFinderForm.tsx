@@ -515,7 +515,7 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
   return (
     <div className="flex">
       {/* <div className="pl-24 pt-10 pb-10 -mr-24 w-[50%] "> */}
-      <div className="pl-24 pt-10 pb-10 -mr-24">
+      <div className="pt-10 pb-10">
         <h1 className="font-inriaSans text-5xl pb-16">
           <strong>Find Your Key</strong>
         </h1>
