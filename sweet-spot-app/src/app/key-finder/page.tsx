@@ -7,7 +7,7 @@ import {
   allNotes,
   octaveDictionary,
   valueToOctaveDictionary,
-  guitarFriendlySuggestion,
+  guitarFriendlySuggestionUp,
 } from "@/utils/key-calculation";
 import KeyFinderResult from "@/components/keyFinder/KeyFinderResult";
 
@@ -287,36 +287,45 @@ export default function KeyFinder() {
     originalKey: "A#",
     songName: "This is Amazing Grace",
   });
-  const [advancedSettings, setAdvancedSettings] = useState({
-    isGuitarFriendly: true,
-    optimalKey: false,
-    //maybe include keys to avoid here
-  });
+  //moving advancedSettings in with the KeyFinderForm.tsx file
+  // const [advancedSettings, setAdvancedSettings] = useState({
+  //   isGuitarFriendly: true,
+  //   optimalKey: false,
+  //   //maybe include keys to avoid here
+  // });
+  type suggestionObject = {
+    suggestedKey: string;
+    higherKeys: string[];
+    lowerKeys: string[];
+  };
   type suggestionDetails = {
     songName: string;
     artist: string | undefined;
     vocalistName: string;
-    suggestedKey: string;
     originalKey: string | undefined;
+    suggestion: suggestionObject;
   };
   const [suggestedSongDetails, setSuggestedSongDetails] =
     useState<suggestionDetails>({
       songName: "",
       artist: "",
       vocalistName: "",
-      suggestedKey: "",
       originalKey: "",
+      suggestion: {
+        suggestedKey: "",
+        higherKeys: [],
+        lowerKeys: [],
+      },
       //eventually go for a space on the left and right
       //eventually can leave space for alternative keys
     });
   return (
-    <div className="flex w-full h-full">
-      <div style={{ width: "50%" }}>
+    <div className="flex w-full h-full md:justify-center md:flex-row md:items-start flex-col items-center">
+      <div className="flex justify-center mx-14">
         <KeyFinderForm setSuggestionDetails={setSuggestedSongDetails} />
-        <h1>Section #1</h1>
       </div>
-      <div className="flex justify-center h-full" style={{ width: "50%" }}>
-        {suggestedSongDetails.suggestedKey !== "" ? (
+      <div className="flex justify-center h-full mx-4 md:mx-14 md:my-0 my-8">
+        {suggestedSongDetails.suggestion.suggestedKey !== "" ? (
           <KeyFinderResult resultDetails={suggestedSongDetails} />
         ) : (
           ""

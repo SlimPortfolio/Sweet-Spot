@@ -1,13 +1,19 @@
-Next Task: 
--Work on right side of the key finder page, to show the results
--potentially could do an arrow tabbing type of deal, or even a carousel that the user can swipe through
-
-
-need to work on the fact that the status is not updating whenever we unselect a song. 
-
-
-//TODO: handle Advanced Search Settings
-//TODO: handle custom vocalists
+Current Branch: 
+-Work on Alternative Keys Label or something to show what other things the user could maybe go for
 //next feature to work on is visualization of the lower end and higher end to see what can be navigated between.
-//we should build out a suggestion setter here, that will take in a suggestion object from the form, and then that information can populate on the green side.
+-style Capo suggestion
+-style additional keys suggestions
+-potentially could do an arrow tabbing type of deal, or even a carousel that the user can swipe through for past searches
+-create an array of objects to store past suggestions, or create a button that will pull up suggestion history
+-Style a little closer to the actual purple theme
+
+//TODO: handle custom vocalists
 //put the api call for the songs and singers inside of the keyfinderform component
+//TODO:Change the Tab Icon, and also the tab Label
+
+
+-Add in support for optimized key
+-For now, lets try to use the optimized key and not worry so much about isGuitarFriendly setting
+-Look into logic for adding in suggestions for Capos and Transpositions
+-Include how much room on each side there is, if we wanted to look at alternative keys. Maybe even have a list of all other possible keys
+//TODO: handle Advanced Search Settings
