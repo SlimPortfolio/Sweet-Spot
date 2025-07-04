@@ -100,26 +100,32 @@ export default function KeyFinderResult(props: resultDetailsProps) {
                                 {object.suggestion.suggestedKey}
                               </span>
                             </p>
-                            <p>
-                              <span className="">
-                                {`Otherwise known as `}
-                                <span className="text-white bg-teal-400 pb-0.5 px-1 rounded-sm font-bold">
-                                  {
-                                    capoSuggestion.get(
-                                      object.suggestion.suggestedKey
-                                    ).chordFamily
-                                  }
+                            {/* {capoSuggestion.get(object.suggestion.suggestedKey)?.chordFamily} */}
+                            {capoSuggestion.get(object.suggestion.suggestedKey)
+                              ?.chordFamily === undefined ? (
+                              ""
+                            ) : (
+                              <p>
+                                <span className="">
+                                  {`Otherwise known as `}
+                                  <span className="text-white bg-teal-400 pb-0.5 px-1 rounded-sm font-bold">
+                                    {
+                                      capoSuggestion.get(
+                                        object.suggestion.suggestedKey
+                                      ).chordFamily
+                                    }
+                                  </span>
+                                  <span className="font-semibold">
+                                    {` Capo `}
+                                    {
+                                      capoSuggestion.get(
+                                        object.suggestion.suggestedKey
+                                      ).capoValue
+                                    }
+                                  </span>
                                 </span>
-                                <span className="font-semibold">
-                                  {` Capo `}
-                                  {
-                                    capoSuggestion.get(
-                                      object.suggestion.suggestedKey
-                                    ).capoValue
-                                  }
-                                </span>
-                              </span>
-                            </p>
+                              </p>
+                            )}
                           </div>
                         </div>
                       </div>
