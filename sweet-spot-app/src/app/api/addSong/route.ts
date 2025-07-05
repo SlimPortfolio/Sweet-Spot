@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     const newSong = await Song.create({
       label: data.label,
       artist: data.artist,
-      id: data.id,
+      // id: data.id,
       songLowNote: data.songLowNote,
       songHighNote: data.songHighNote,
       songOriginalKey: data.songOriginalKey,

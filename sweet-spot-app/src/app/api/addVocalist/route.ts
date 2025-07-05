@@ -10,7 +10,7 @@ export async function POST(req: Request) {
 
     const newVocalist = await Vocalist.create({
       label: data.label,
-      id: data.id,
+      // id: data.id,
       vocalistLowNote: data.vocalistLowNote,
       vocalistHighNote: data.vocalistHighNote,
     });

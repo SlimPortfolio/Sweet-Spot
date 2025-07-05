@@ -42,7 +42,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
+import { deleteVocalist } from "@/utils/deleteVocalist";
 const data: Payment[] = [
   {
     id: "m5gr84i9",
@@ -96,7 +96,6 @@ export type Payment = {
 
 export type SelectionObject = {
   label: string;
-  id: string;
   artist?: string;
   songLowNote?: string;
   songHighNote?: string;
@@ -199,7 +198,17 @@ export const columns: ColumnDef<SelectionObject>[] = [
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                if (id) {
+                  deleteVocalist(id);
+                } else {
+                  console.log("missing _id");
+                }
+              }}
+            >
+              Delete
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
@@ -259,6 +268,20 @@ export default function ManageMembersDashboard() {
       rowSelection,
     },
   });
+
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const handleDelete = async (id: string) => {
+    try {
+      setDeletingId(id);
+      await deleteVocalist(id);
+      //   refreshVocalists();
+    } catch (err) {
+      alert("Failed to delete vocalist.");
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
   return (
     <div className="w-full">

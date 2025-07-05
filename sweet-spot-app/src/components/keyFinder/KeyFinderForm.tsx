@@ -48,7 +48,7 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
 
   interface SelectionObject {
     label: string;
-    id: string;
+    _id: string;
     artist?: string;
     songLowNote?: string;
     songHighNote?: string;
@@ -58,7 +58,7 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
   }
   const [selectedSong, setSelectedSong] = useState<SelectionObject>({
     label: "",
-    id: "default",
+    _id: "",
     artist: "",
     songLowNote: "",
     songHighNote: "",
@@ -66,7 +66,7 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
   });
   const [selectedVocalist, setSelectedVocalist] = useState<SelectionObject>({
     label: "",
-    id: "default",
+    _id: "",
     vocalistLowNote: "",
     vocalistHighNote: "",
   });
@@ -77,7 +77,7 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
     //maybe include keys to avoid here
   });
   function submitForm() {
-    if (selectedSong.id === "default" || selectedVocalist.id === "default") {
+    if (selectedSong._id === "" || selectedVocalist._id === "") {
       setIsSubmitError(true);
       return;
     }
@@ -106,7 +106,7 @@ export default function KeyFinderForm(props: KeyFinderFormProps) {
   }
   function calculateKey(): suggestionObject {
     //handle incomplete submission errors
-    if (selectedSong.id === "default" || selectedVocalist.id === "default") {
+    if (selectedSong._id === "" || selectedVocalist._id === "") {
       setIsSubmitError(true);
       //set the state of the status message.
     } else {
