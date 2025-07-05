@@ -1,4 +1,5 @@
 "use client";
+import ManageMembersDashboard from "@/components/manageMembers/ManageMembersDashboard";
 import { useState } from "react";
 
 export default function ManageMembers() {
@@ -58,7 +59,7 @@ export default function ManageMembers() {
   };
   return (
     <div>
-      <h1>Manage Members Here</h1>
+      {/* <h1>Manage Members Here</h1>
       <div className="space-y-2">
         <button
           onClick={handleAddVocalist}
@@ -78,7 +79,8 @@ export default function ManageMembers() {
           {loading ? "Adding..." : "Add Song"}
         </button>
         {success && <p className="text-green-600">Item added!</p>}
-      </div>
+      </div> */}
+      <ManageMembersDashboard />
     </div>
   );
 }
