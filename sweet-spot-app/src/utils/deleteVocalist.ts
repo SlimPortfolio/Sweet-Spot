@@ -1,6 +1,6 @@
 export const deleteVocalist = async (id: string) => {
   try {
-    const res = await fetch(`/api/vocalists?id=${id}`, {
+    const res = await fetch(`/api/vocalists?_id=${id}`, {
       method: "DELETE",
     });
 

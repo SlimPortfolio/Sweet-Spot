@@ -20,7 +20,16 @@ import {
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
+import { ArrowUpDown, ChevronDown, Icon, MoreHorizontal } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -43,182 +52,151 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { deleteVocalist } from "@/utils/deleteVocalist";
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@example.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@example.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@example.com",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@example.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@example.com",
-  },
-];
-
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
-
-// interface SelectionObject {
-//   label: string;
-//   id: string;
-//   artist?: string;
-//   songLowNote?: string;
-//   songHighNote?: string;
-//   songOriginalKey?: string;
-//   vocalistLowNote?: string;
-//   vocalistHighNote?: string;
-// }
-
-export type SelectionObject = {
-  label: string;
-  artist?: string;
-  songLowNote?: string;
-  songHighNote?: string;
-  songOriginalKey?: string;
-  vocalistLowNote?: string;
-  vocalistHighNote?: string;
-  _id?: string;
-};
-export const columns: ColumnDef<SelectionObject>[] = [
-  //   {
-  //     id: "select",
-  //     header: ({ table }) => (
-  //       <Checkbox
-  //         checked={
-  //           table.getIsAllPageRowsSelected() ||
-  //           (table.getIsSomePageRowsSelected() && "indeterminate")
-  //         }
-  //         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //         aria-label="Select all"
-  //       />
-  //     ),
-  //     cell: ({ row }) => (
-  //       <Checkbox
-  //         checked={row.getIsSelected()}
-  //         onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //         aria-label="Select row"
-  //       />
-  //     ),
-  //     enableSorting: false,
-  //     enableHiding: false,
-  //   },
-  // {
-  //   accessorKey: "status",
-  //   header: "Status",
-  //   cell: ({ row }) => (
-  //     <div className="capitalize">{row.getValue("status")}</div>
-  //   ),
-  // },
-  //   {
-  //     accessorKey: "email",
-  //     header: ({ column }) => {
-  //       return (
-  //         <Button
-  //           variant="ghost"
-  //           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-  //         >
-  //           Email
-  //           <ArrowUpDown />
-  //         </Button>
-  //       );
-  //     },
-  //     cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
-  //   },
-  //   {
-  //     accessorKey: "amount",
-  //     header: () => <div className="text-right">Amount</div>,
-  //     cell: ({ row }) => {
-  //       const amount = parseFloat(row.getValue("amount"));
-
-  //       // Format the amount as a dollar amount
-  //       const formatted = new Intl.NumberFormat("en-US", {
-  //         style: "currency",
-  //         currency: "USD",
-  //       }).format(amount);
-
-  //       return <div className="text-right font-medium">{formatted}</div>;
-  //     },
-  //   },
-  {
-    accessorKey: "label",
-    header: "Name",
-    cell: ({ row }) => <div>{row.getValue("label")}</div>,
-  },
-  {
-    accessorKey: "vocalistLowNote",
-    header: "Low Note",
-    cell: ({ row }) => <div>{row.getValue("vocalistLowNote")}</div>,
-  },
-  {
-    accessorKey: "vocalistHighNote",
-    header: "High Note",
-    cell: ({ row }) => <div>{row.getValue("vocalistHighNote")}</div>,
-  },
-  {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const element = row.original;
-      const id = element["_id"];
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => {
-                if (id) {
-                  deleteVocalist(id);
-                } else {
-                  console.log("missing _id");
-                }
-              }}
-            >
-              Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
-  },
-];
+import { Trash2, Pencil } from "lucide-react";
 
 export default function ManageMembersDashboard() {
   //   const [songs, setSongs] = useState<SelectionObject[]>([]);
   const [vocalists, setVocalists] = useState<SelectionObject[]>([]);
+  const [vocalistRefresh, setVocalistRefresh] = useState(false);
+  const data: Payment[] = [
+    {
+      id: "m5gr84i9",
+      amount: 316,
+      status: "success",
+      email: "ken99@example.com",
+    },
+    {
+      id: "3u1reuv4",
+      amount: 242,
+      status: "success",
+      email: "Abe45@example.com",
+    },
+    {
+      id: "derv1ws0",
+      amount: 837,
+      status: "processing",
+      email: "Monserrat44@example.com",
+    },
+    {
+      id: "5kma53ae",
+      amount: 874,
+      status: "success",
+      email: "Silas22@example.com",
+    },
+    {
+      id: "bhqecj4p",
+      amount: 721,
+      status: "failed",
+      email: "carmella@example.com",
+    },
+  ];
+
+  type Payment = {
+    id: string;
+    amount: number;
+    status: "pending" | "processing" | "success" | "failed";
+    email: string;
+  };
+
+  // interface SelectionObject {
+  //   label: string;
+  //   id: string;
+  //   artist?: string;
+  //   songLowNote?: string;
+  //   songHighNote?: string;
+  //   songOriginalKey?: string;
+  //   vocalistLowNote?: string;
+  //   vocalistHighNote?: string;
+  // }
+
+  type SelectionObject = {
+    label: string;
+    artist?: string;
+    songLowNote?: string;
+    songHighNote?: string;
+    songOriginalKey?: string;
+    vocalistLowNote?: string;
+    vocalistHighNote?: string;
+    _id?: string;
+  };
+  const columns: ColumnDef<SelectionObject>[] = [
+    {
+      accessorKey: "label",
+      header: "Name",
+      cell: ({ row }) => <div>{row.getValue("label")}</div>,
+    },
+    {
+      accessorKey: "vocalistLowNote",
+      header: "Low Note",
+      cell: ({ row }) => <div>{row.getValue("vocalistLowNote")}</div>,
+    },
+    {
+      accessorKey: "vocalistHighNote",
+      header: "High Note",
+      cell: ({ row }) => <div>{row.getValue("vocalistHighNote")}</div>,
+    },
+    {
+      id: "actions",
+      enableHiding: false,
+      cell: ({ row }) => {
+        const element = row.original;
+        const id = element["_id"];
+        return (
+          <div>
+            <Dialog>
+              <DialogTrigger className=" hover:opacity-70 duration-200">
+                <Pencil />
+              </DialogTrigger>
+              <DialogContent className="flex flex-col w-screen max-h-[70vh]">
+                <DialogTitle>Edit User</DialogTitle>
+                <div>
+                  <p>
+                    Here is where we will put the form for {row.original.label}
+                  </p>
+                  <Button variant={"default"}>Save</Button>
+                  <DialogClose className="font-bold rounded-md hover:bg-slate-50 py-1 px-2">
+                    <div>Close</div>
+                  </DialogClose>
+                </div>
+              </DialogContent>
+            </Dialog>
+            <Dialog>
+              <DialogTrigger className=" hover:opacity-70 duration-200">
+                <Trash2 />
+              </DialogTrigger>
+              <DialogContent className="flex flex-col w-screen max-h-[70vh]">
+                <DialogTitle>Delete User</DialogTitle>
+                <div>
+                  <p>Are you sure you want to delete {row.original.label}?</p>
+                  <DialogClose asChild>
+                    <Button
+                      variant={"destructive"}
+                      onClick={() => {
+                        if (id) {
+                          deleteVocalist(id);
+                          setVocalistRefresh(true);
+                          alert(
+                            `${element.label} has been deleted successfully.`
+                          );
+                        } else {
+                          console.log("missing _id");
+                        }
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </DialogClose>
+                  <DialogClose className="font-bold rounded-md hover:bg-slate-50 py-1 px-2">
+                    <div>Close</div>
+                  </DialogClose>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
+        );
+      },
+    },
+  ];
   useEffect(() => {
     // const fetchSongs = async () => {
     //   const res = await fetch("/api/songs");
@@ -234,7 +212,8 @@ export default function ManageMembersDashboard() {
     };
     // fetchSongs();
     fetchVocalists();
-  }, []);
+    setVocalistRefresh(false);
+  }, [vocalistRefresh]);
   console.log(vocalists);
 
   //   return (
@@ -275,6 +254,7 @@ export default function ManageMembersDashboard() {
     try {
       setDeletingId(id);
       await deleteVocalist(id);
+      setVocalistRefresh(true);
       //   refreshVocalists();
     } catch (err) {
       alert("Failed to delete vocalist.");
@@ -285,6 +265,21 @@ export default function ManageMembersDashboard() {
 
   return (
     <div className="w-full">
+      <h1>hello</h1>
+      <Dialog>
+        <DialogTrigger className="bg-white outline outline-slate-400 p-1 rounded-full outline-[0.5px] hover:bg-slate-100 duration-500">
+          <h1>Delete User</h1>
+        </DialogTrigger>
+        <DialogContent className="flex flex-col w-screen max-h-[70vh]">
+          <DialogTitle>Delete User</DialogTitle>
+          <div>
+            <Button className="bg-red-500">Delete</Button>
+            <DialogClose className="font-bold rounded-md hover:bg-slate-50 py-1 px-2">
+              <div>Close</div>
+            </DialogClose>
+          </div>
+        </DialogContent>
+      </Dialog>
       <div className="flex items-center py-4">
         {/* <Input
           placeholder="Filter emails..."
