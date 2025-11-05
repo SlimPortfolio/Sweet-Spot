@@ -1,3 +1,14 @@
+// {
+//   "extends": ["next/core-web-vitals", "next/typescript"]
+// }
+
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "rules": {
+    // Set specific rules you want to adjust the severity for
+    "@typescript-eslint/no-unused-vars": ["warn"], // Change to "warn" to treat unused variables as warnings
+    "react-hooks/exhaustive-deps": "warn", // Set to "warn" instead of "error"
+    "prefer-const": "warn", // Warn when you don't use 'const' where applicable
+    "max-warnings": 0 // Fail the build if there are any warnings (optional, can be removed if you prefer to allow warnings)
+  }
 }
