@@ -27,12 +27,12 @@ import {
 
 type SelectionObject = {
   label: string;
-  id: string;
   songLowNote?: string;
   songHighNote?: string;
   songOriginalKey?: string;
   vocalistLowNote?: string;
   vocalistHighNote?: string;
+  _id: string;
 };
 type KFCProps = {
   selections: SelectionObject[];
@@ -65,7 +65,7 @@ export function KFComboBox(props: KFCProps) {
           {id
             ? //label is where we will find what is being displayed.
               //this section determines what will be displayed on the button that will be clicked
-              props.selections.find((selection) => selection.id === id)?.label
+              props.selections.find((selection) => selection._id === id)?.label
             : props.placeholder}
 
           {
@@ -105,17 +105,17 @@ export function KFComboBox(props: KFCProps) {
               {props.selections.map((selection) => (
                 //each potential song / vocalist is mapped here as CommandItems
                 <CommandItem
-                  key={selection.id}
+                  key={selection._id}
                   value={selection.label}
                   className="cursor-pointer"
                   onSelect={() => {
-                    setId(selection.id === id ? "" : selection.id);
+                    setId(selection._id === id ? "" : selection._id);
                     props.setSelectedState(selection);
                     setOpen(false);
                     if (props.selectedState === selection) {
                       props.setSelectedState({
                         label: "",
-                        id: "default",
+                        _id: "",
                         songLowNote: "",
                         songHighNote: "",
                         songOriginalKey: "",
@@ -126,7 +126,7 @@ export function KFComboBox(props: KFCProps) {
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      id === selection.id ? "opacity-100" : "opacity-0"
+                      id === selection._id ? "opacity-100" : "opacity-0"
                     )}
                   />
                   {selection.label}
